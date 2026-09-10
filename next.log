@@ -1,0 +1,8 @@
+▲ Next.js 16.3.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://100.80.23.97:3000
+✓ Ready in 540ms
+⚠ Warning: Next.js ignored package-lock.json in /home/najib because it is outside the current Git repository (/home/najib/Dokumen/pribadi/portof-dkv).
+ To use this directory, set `turbopack.root` in your Next.js config.
+
+✓ Running next.config.ts took 64ms
