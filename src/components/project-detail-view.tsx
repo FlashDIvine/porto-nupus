@@ -40,7 +40,7 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
       >
         <Link
           href="/#gallery"
-          className="inline-flex items-center gap-2 text-xs font-mono text-white/60 hover:text-[#D4FF00] transition-colors group"
+          className="inline-flex items-center gap-2 text-xs font-mono text-[#6B6661] hover:text-[#2B50EC] transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           <span>{isId ? 'Kembali ke Semua Proyek' : 'Back to all projects'}</span>
@@ -57,13 +57,13 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
         {/* Category & Metadata */}
         <div className="flex flex-wrap items-center gap-3">
           {project.category && (
-            <span className="inline-flex items-center text-xs font-medium uppercase tracking-wider px-3 py-1 rounded-full bg-[#D4FF00]/10 text-[#D4FF00] border border-[#D4FF00]/30">
+            <span className="inline-flex items-center text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-[#D8E2DC] text-[#181716] border border-[#E6E2D8] shadow-xs">
               {project.category}
             </span>
           )}
           {project.created_at && (
-            <span className="inline-flex items-center gap-1 text-xs text-white/40 font-mono">
-              <Calendar className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-1.5 text-xs text-[#6B6661] font-mono">
+              <Calendar className="w-3.5 h-3.5 text-[#E26D5C]" />
               {new Date(project.created_at).toLocaleDateString(isId ? 'id-ID' : 'en-US', {
                 year: 'numeric',
                 month: 'short',
@@ -73,13 +73,13 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
         </div>
 
         {/* Big Title */}
-        <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-semibold text-white tracking-tight leading-[1.1]">
+        <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-semibold text-[#181716] tracking-tight leading-[1.05]">
           {titleText}
         </h1>
 
         {/* Full-width Hero Cover Image */}
         {project.cover_image_url && (
-          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden border border-white/10 bg-[#121212] mt-8 shadow-2xl">
+          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden border border-[#E6E2D8] bg-[#FFFFFF] mt-8 shadow-[0_16px_40px_rgba(24,23,22,0.06)]">
             <Image
               src={project.cover_image_url}
               alt={titleText}
@@ -98,14 +98,14 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-60px' }}
-        className="mt-12 sm:mt-16 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-8"
+        className="mt-12 sm:mt-16 pt-8 border-t border-[#E6E2D8] grid grid-cols-1 md:grid-cols-3 gap-8"
       >
         <div className="md:col-span-1 space-y-4">
-          <h2 className="text-xs font-mono uppercase tracking-widest text-[#D4FF00] flex items-center gap-2">
+          <h2 className="text-xs font-mono uppercase tracking-widest text-[#E26D5C] flex items-center gap-2">
             <Sparkles className="w-3.5 h-3.5" />
             {isId ? 'Konsep & Narasi' : 'Concept & Context'}
           </h2>
-          <p className="text-sm text-white/50">
+          <p className="text-sm text-[#6B6661] font-body">
             {isId
               ? 'Latar belakang eksplorasi visual, proses desain, dan perumusan solusi grafis.'
               : 'Background visual exploration, design process, and graphical solution formulation.'}
@@ -114,15 +114,15 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
           {/* 4. Tools Used Section */}
           {project.tools_used && project.tools_used.length > 0 && (
             <div className="pt-4 space-y-2">
-              <h3 className="text-xs font-mono text-white/60 uppercase tracking-wider flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-[#D4FF00]" />
+              <h3 className="text-xs font-mono text-[#181716] uppercase tracking-wider flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5 text-[#E26D5C]" />
                 {isId ? 'Peralatan & Perangkat' : 'Tools Used'}
               </h3>
               <div className="flex flex-wrap gap-1.5">
                 {project.tools_used.map((tool) => (
                   <span
                     key={tool}
-                    className="text-xs font-mono px-2.5 py-1 rounded-md bg-[#161616] text-white/80 border border-white/10"
+                    className="text-xs font-mono px-3 py-1 rounded-lg bg-[#FFFFFF] text-[#181716] border border-[#E6E2D8] shadow-2xs"
                   >
                     {tool}
                   </span>
@@ -132,7 +132,7 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
           )}
         </div>
 
-        <div className="md:col-span-2 text-base sm:text-lg text-white/80 font-body leading-relaxed space-y-4">
+        <div className="md:col-span-2 text-base sm:text-lg text-[#181716]/90 font-body leading-relaxed space-y-4">
           {descriptionText.split('\n\n').map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
           ))}
@@ -146,18 +146,18 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="mt-16 sm:mt-24 pt-12 border-t border-white/10 space-y-10"
+          className="mt-16 sm:mt-24 pt-12 border-t border-[#E6E2D8] space-y-10"
         >
           <div className="flex items-center justify-between">
             <div>
-              <span className="text-xs font-mono uppercase tracking-widest text-[#D4FF00]">
-                Gallery & Process
+              <span className="text-xs font-mono uppercase tracking-widest text-[#E26D5C]">
+                Gallery &amp; Process
               </span>
-              <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-white tracking-tight mt-1">
+              <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-[#181716] tracking-tight mt-1 leading-[1.05]">
                 {isId ? 'Dokumentasi & Artefak Visual' : 'Visual Artifacts & Showcase'}
               </h2>
             </div>
-            <span className="text-xs font-mono text-white/40">
+            <span className="text-xs font-mono text-[#6B6661]">
               {imagesList.length} {isId ? 'Aset' : 'Assets'}
             </span>
           </div>
@@ -174,9 +174,9 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
               return (
                 <figure
                   key={`${img.url}-${index}`}
-                  className="rounded-2xl overflow-hidden border border-white/10 bg-[#121212] shadow-xl group"
+                  className="rounded-2xl overflow-hidden border border-[#E6E2D8] bg-[#FFFFFF] shadow-[0_8px_30px_rgba(24,23,22,0.04)] group"
                 >
-                  <div className="relative w-full aspect-[16/10] sm:aspect-[16/9]">
+                  <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-[#F2EFE9]">
                     <Image
                       src={img.url}
                       alt={captionStr || `${titleText} - image ${index + 1}`}
@@ -186,9 +186,9 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
                     />
                   </div>
                   {captionStr && (
-                    <figcaption className="p-4 bg-[#0e0e0e] border-t border-white/5 text-xs text-white/60 font-mono flex items-center justify-between">
+                    <figcaption className="p-4 bg-[#F2EFE9] border-t border-[#E6E2D8] text-xs text-[#181716] font-mono flex items-center justify-between">
                       <span>{captionStr}</span>
-                      <span className="text-white/30">0{index + 1}</span>
+                      <span className="text-[#6B6661]">0{index + 1}</span>
                     </figcaption>
                   )}
                 </figure>
@@ -199,10 +199,10 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
       )}
 
       {/* 5. Navigation & Next Projects */}
-      <section className="mt-16 sm:mt-24 pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <section className="mt-16 sm:mt-24 pt-10 border-t border-[#E6E2D8] flex flex-col sm:flex-row items-center justify-between gap-6">
         <Link
           href="/#gallery"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white/80 hover:text-[#0a0a0a] hover:bg-[#D4FF00] hover:border-[#D4FF00] transition-all text-sm font-medium"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#181716] text-[#FAF8F5] hover:bg-[#2B50EC] transition-all text-sm font-medium shadow-sm hover:shadow-md"
         >
           <ArrowLeft className="w-4 h-4" />
           {isId ? 'Lihat Semua Proyek' : 'View All Projects'}
@@ -210,14 +210,14 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
 
         {otherProjects.length > 0 && (
           <div className="flex items-center gap-3">
-            <span className="text-xs text-white/40 font-mono hidden sm:inline">
+            <span className="text-xs text-[#6B6661] font-mono hidden sm:inline">
               {isId ? 'Karya Lainnya:' : 'More Projects:'}
             </span>
             {otherProjects.slice(0, 2).map((other) => (
               <Link
                 key={other.slug}
                 href={`/project/${other.slug}`}
-                className="text-xs font-mono text-white/70 hover:text-[#D4FF00] underline-offset-4 hover:underline"
+                className="text-xs font-mono text-[#181716] hover:text-[#2B50EC] underline-offset-4 hover:underline"
               >
                 {t(other.title)} &rarr;
               </Link>

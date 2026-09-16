@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Download, Mail, Phone, Globe, ExternalLink, Sparkles, Award } from 'lucide-react'
+import { Download, Mail, Phone, Globe, Sparkles, Award, ArrowUpRight } from 'lucide-react'
 import { useLanguage } from '@/context/language-context'
 import type { Profile, ContactLink } from '@/types/database'
 
@@ -52,7 +52,73 @@ function renderContactIcon(platform: string) {
     )
   }
 
-  return <ExternalLink className="w-4 h-4" />
+  return <Globe className="w-4 h-4" />
+}
+
+function getSocialStyles(platform: string) {
+  const p = platform.toLowerCase()
+
+  if (p.includes('insta')) {
+    return {
+      cardHover: 'hover:border-[#E26D5C] hover:shadow-[0_12px_28px_-6px_rgba(226,109,92,0.22)]',
+      iconBox: 'text-[#E26D5C] group-hover:bg-[#E26D5C] group-hover:text-white',
+      arrowHover: 'group-hover:text-[#E26D5C]',
+    }
+  }
+  if (p.includes('behance')) {
+    return {
+      cardHover: 'hover:border-[#2B50EC] hover:shadow-[0_12px_28px_-6px_rgba(43,80,236,0.22)]',
+      iconBox: 'text-[#2B50EC] group-hover:bg-[#2B50EC] group-hover:text-white',
+      arrowHover: 'group-hover:text-[#2B50EC]',
+    }
+  }
+  if (p.includes('dribbble')) {
+    return {
+      cardHover: 'hover:border-[#EA4C89] hover:shadow-[0_12px_28px_-6px_rgba(234,76,137,0.22)]',
+      iconBox: 'text-[#EA4C89] group-hover:bg-[#EA4C89] group-hover:text-white',
+      arrowHover: 'group-hover:text-[#EA4C89]',
+    }
+  }
+  if (p.includes('linkedin')) {
+    return {
+      cardHover: 'hover:border-[#0A66C2] hover:shadow-[0_12px_28px_-6px_rgba(10,102,194,0.22)]',
+      iconBox: 'text-[#0A66C2] group-hover:bg-[#0A66C2] group-hover:text-white',
+      arrowHover: 'group-hover:text-[#0A66C2]',
+    }
+  }
+
+  return {
+    cardHover: 'hover:border-[#E26D5C] hover:shadow-[0_12px_28px_-6px_rgba(226,109,92,0.22)]',
+    iconBox: 'text-[#E26D5C] group-hover:bg-[#E26D5C] group-hover:text-white',
+    arrowHover: 'group-hover:text-[#E26D5C]',
+  }
+}
+
+function MarqueeDivider({ reverse = false }: { reverse?: boolean }) {
+  const tickerText = '✦ BRAND IDENTITY ✦ EDITORIAL SYSTEMS ✦ PACKAGING DESIGN ✦ EXPERIMENTAL TYPE ✦ CREATIVE DIRECTION '
+  const tickerContent = tickerText.repeat(4)
+
+  return (
+    <div className="w-full overflow-hidden rounded-xl bg-[#F2EFE9] border border-[#E6E2D8] py-2.5 select-none">
+      <motion.div
+        className="flex w-max"
+        initial={{ x: reverse ? '-50%' : '0%' }}
+        animate={{ x: reverse ? '0%' : '-50%' }}
+        transition={{
+          repeat: Infinity,
+          ease: 'linear',
+          duration: 70,
+        }}
+      >
+        <span className="font-mono text-xs uppercase tracking-widest text-[#6B6661] whitespace-nowrap">
+          {tickerContent}
+        </span>
+        <span className="font-mono text-xs uppercase tracking-widest text-[#6B6661] whitespace-nowrap" aria-hidden="true">
+          {tickerContent}
+        </span>
+      </motion.div>
+    </div>
+  )
 }
 
 export function AboutPageView({ profile }: AboutPageViewProps) {
@@ -69,66 +135,119 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
   const skillsList = Array.isArray(profile.skills) ? profile.skills : []
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-16">
-      {/* 1 & 2. Profile Photo + Name + Tagline */}
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 flex flex-col gap-10 sm:gap-14">
+      {/* 1. Studio Header & Profile Picture */}
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="flex flex-col md:flex-row items-center md:items-start gap-8 sm:gap-12"
       >
-        {/* Profile Photo */}
-        <div className="relative shrink-0">
-          <div className="relative w-44 h-44 sm:w-56 sm:h-56 rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl bg-[#161616] group">
+        {/* Profile Picture with Layered Artistic Composition & Rotating Stamp */}
+        <div className="relative shrink-0 group">
+          {/* Layered background accent card (offset & organic feel) */}
+          <div className="absolute inset-0 rounded-2xl bg-[#D8E2DC]/50 -rotate-3 translate-x-2 translate-y-2 transition-transform duration-300 group-hover:rotate-0 group-hover:translate-x-1 group-hover:translate-y-1 pointer-events-none" />
+
+          {/* Profile photo container */}
+          <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-[#E6E2D8] shadow-[0_12px_30px_-8px_rgba(226,109,92,0.25)] bg-[#FFFFFF]">
             {profile.photo_url ? (
               <Image
                 src={profile.photo_url}
                 alt={nameText}
                 fill
                 priority
-                sizes="(max-width: 640px) 176px, 224px"
-                className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 640px) 192px, 224px"
+                className="object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-500"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-white/30 font-mono text-xs">
+              <div className="w-full h-full flex items-center justify-center text-[#6B6661] font-mono text-xs bg-[#F2EFE9]">
                 No Photo
               </div>
             )}
-            {/* Elegant Inner Border Highlight */}
-            <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10 pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-[#E6E2D8]/40 pointer-events-none" />
           </div>
 
-          {/* Accent dot badge */}
-          <div className="absolute -bottom-2 -right-2 p-2 rounded-2xl bg-[#0a0a0a] border border-white/10 shadow-lg">
-            <div className="w-4 h-4 rounded-full bg-[#D4FF00] flex items-center justify-center">
-              <span className="w-2 h-2 rounded-full bg-[#0a0a0a]" />
+          {/* Creative rotating circular stamp / badge floating near the avatar corner */}
+          <div className="absolute -bottom-5 -right-5 sm:-bottom-6 sm:-right-6 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-[#FAF8F5]/95 backdrop-blur-xs border border-[#E6E2D8] shadow-md flex items-center justify-center p-1 z-20 select-none">
+            <svg
+              viewBox="0 0 100 100"
+              className="w-full h-full animate-[spin_12s_linear_infinite]"
+              aria-label="• VISUAL COMMUNICATION • DKV ARCHIVE 2026 •"
+            >
+              <defs>
+                <path
+                  id="avatarCirclePath"
+                  d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
+                />
+              </defs>
+              <text
+                className="text-[7px] font-mono uppercase fill-[#181716] font-semibold"
+                xmlSpace="preserve"
+              >
+                <textPath
+                  href="#avatarCirclePath"
+                  textLength="224"
+                  lengthAdjust="spacing"
+                >
+                  • VISUAL COMMUNICATION • DKV ARCHIVE 2026 •
+                </textPath>
+              </text>
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <span className="text-[#E26D5C] text-sm font-semibold">✦</span>
             </div>
           </div>
         </div>
 
-        {/* Name, Tagline, & Quick Action */}
+        {/* Name, Tagline, Live Status, & Actions */}
         <div className="flex-1 text-center md:text-left space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4FF00]/10 border border-[#D4FF00]/30 text-[#D4FF00] text-xs font-mono uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>{isId ? 'Profil Kreatif' : 'Creative Profile'}</span>
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D8E2DC] border border-[#E6E2D8] text-[#181716] text-xs font-mono uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-[#E26D5C]" />
+              <span>{isId ? 'Profil Kreatif' : 'Creative Profile'}</span>
+            </div>
+
+            {/* Live status indicator with tooltip */}
+            <div
+              className="group/status relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-mono text-[#181716] shadow-2xs cursor-default"
+              role="status"
+              aria-label="Open for freelance & collaborations"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E26D5C] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#E26D5C]" />
+              </span>
+              <span className="text-[11px] sm:text-xs font-medium">
+                {isId ? 'Terbuka untuk kolaborasi' : 'Open for freelance & collaborations'}
+              </span>
+
+              {/* Floating Tooltip */}
+              <div
+                role="tooltip"
+                className="pointer-events-none absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-[#181716] text-[#FAF8F5] text-[10px] font-mono whitespace-nowrap opacity-0 group-hover/status:opacity-100 transition-opacity duration-200 shadow-md z-30"
+              >
+                Open for freelance &amp; collaborations
+                <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-4 border-transparent border-t-[#181716]" />
+              </div>
+            </div>
           </div>
 
-          <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl font-semibold text-white tracking-tight leading-tight break-words">
+          <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl font-semibold text-[#181716] tracking-tight leading-[1.05] break-words">
             {nameText}
           </h1>
 
-          <p className="text-lg sm:text-xl font-heading text-white/70 italic max-w-xl">
+          <p className="text-lg sm:text-xl font-heading text-[#6B6661] italic max-w-xl">
             &ldquo;{taglineText}&rdquo;
           </p>
 
-          {/* 5. Download CV Button */}
+          {/* Download CV Button */}
           {profile.cv_url && (
             <div className="pt-2">
               <a
                 href={profile.cv_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full bg-[#D4FF00] hover:bg-[#bce300] text-[#0a0a0a] font-semibold text-sm shadow-lg shadow-[#D4FF00]/15 transition-all transform hover:-translate-y-0.5 w-full sm:w-auto text-center"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full bg-[#181716] hover:bg-[#2B50EC] text-[#FAF8F5] font-medium text-sm shadow-sm hover:shadow-md transition-all transform hover:-translate-y-0.5 w-full sm:w-auto text-center"
               >
                 <Download className="w-4 h-4" />
                 <span>{isId ? 'Unduh Curriculum Vitae (CV)' : 'Download Curriculum Vitae (CV)'}</span>
@@ -138,101 +257,127 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
         </div>
       </motion.section>
 
-      {/* 3. Bio Paragraphs */}
+      {/* Animated Marquee Divider 1 */}
+      <MarqueeDivider />
+
+      {/* 2. Bio Paragraphs & Philosophy */}
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-8"
+        className="grid grid-cols-1 md:grid-cols-3 gap-8"
       >
         <div className="space-y-2">
-          <span className="text-xs font-mono uppercase tracking-widest text-[#D4FF00]">
+          <span className="text-xs font-mono uppercase tracking-widest text-[#E26D5C]">
             {isId ? 'Filosofi & Pendekatan' : 'Philosophy & Approach'}
           </span>
-          <h2 className="font-heading text-2xl font-semibold text-white">
+          <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-[#181716] leading-[1.1]">
             {isId ? 'Tentang Praktik Desain' : 'About Design Practice'}
           </h2>
         </div>
 
-        <div className="md:col-span-2 space-y-4 text-base sm:text-lg text-white/80 font-body leading-relaxed">
+        <div className="md:col-span-2 space-y-4 text-base sm:text-lg text-[#181716]/90 font-body leading-relaxed">
           {bioText ? (
             bioText.split('\n\n').map((paragraph, idx) => (
               <p key={idx}>{paragraph}</p>
             ))
           ) : (
-            <p className="text-white/40 italic">
+            <p className="text-[#6B6661] italic">
               {isId ? 'Belum ada data biografi.' : 'No biography provided yet.'}
             </p>
           )}
         </div>
       </motion.section>
 
-      {/* 4. Skills & Competencies */}
+      {/* Animated Marquee Divider 2 */}
+      {skillsList.length > 0 && <MarqueeDivider reverse />}
+
+      {/* 3. Interactive Creative Skills & Disciplines */}
       {skillsList.length > 0 && (
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="pt-10 border-t border-white/10 space-y-6"
+          className="space-y-6"
         >
           <div className="flex items-center gap-2">
-            <Award className="w-4 h-4 text-[#D4FF00]" />
-            <h2 className="font-heading text-2xl font-semibold text-white">
+            <Award className="w-4 h-4 text-[#E26D5C]" />
+            <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-[#181716] leading-[1.1]">
               {isId ? 'Keahlian & Disiplin Kreatif' : 'Skills & Creative Disciplines'}
             </h2>
           </div>
 
-          <div className="flex flex-wrap gap-2.5">
-            {skillsList.map((skill) => (
-              <span
-                key={skill}
-                className="px-4 py-2 rounded-xl bg-[#121212] border border-white/10 text-white/90 text-sm font-body hover:border-[#D4FF00]/50 hover:bg-[#161616] transition-colors"
+          <div className="flex flex-wrap gap-2.5 sm:gap-3">
+            {skillsList.map((skill, idx) => (
+              <div
+                key={`${skill}-${idx}`}
+                tabIndex={0}
+                role="button"
+                className="group bg-[#FFFFFF] text-[#181716] border border-[#E6E2D8] px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1.5 shadow-sm hover:bg-[#E26D5C] hover:text-white hover:border-[#E26D5C] hover:-translate-y-1 hover:shadow-md cursor-pointer select-none active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E26D5C]"
               >
-                {skill}
-              </span>
+                <span className="text-[#E26D5C] group-hover:text-white group-hover:rotate-45 transition-all duration-300 text-xs inline-block shrink-0">
+                  ✦
+                </span>
+                <span>{skill}</span>
+              </div>
             ))}
           </div>
         </motion.section>
       )}
 
-      {/* 6. Contact Links */}
+      {/* Animated Marquee Divider 3 */}
+      {contactList.length > 0 && <MarqueeDivider />}
+
+      {/* 4. Contact & Social Cards */}
       {contactList.length > 0 && (
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="pt-10 border-t border-white/10 space-y-6"
+          className="space-y-6"
         >
-          <h2 className="font-heading text-2xl font-semibold text-white">
+          <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-[#181716] leading-[1.1]">
             {isId ? 'Hubungi & Kolaborasi' : 'Contact & Collaboration'}
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-            {contactList.map((contact, idx) => (
-              <a
-                key={`${contact.platform}-${idx}`}
-                href={contact.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#121212] border border-white/10 hover:border-[#D4FF00]/50 hover:bg-[#161616] transition-all text-white/80 hover:text-white group"
-              >
-                <div className="p-2.5 rounded-lg bg-[#1a1a1a] text-[#D4FF00] group-hover:scale-105 transition-transform">
-                  {renderContactIcon(contact.platform)}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs font-mono text-white/40 uppercase tracking-wider">
-                    {contact.platform}
-                  </p>
-                  <p className="text-sm font-medium text-white truncate">
-                    {contact.label || contact.url}
-                  </p>
-                </div>
-                <ExternalLink className="w-3.5 h-3.5 text-white/30 group-hover:text-[#D4FF00] transition-colors" />
-              </a>
-            ))}
+            {contactList.map((contact, idx) => {
+              const styles = getSocialStyles(contact.platform)
+              const isDirectAction =
+                contact.url.startsWith('mailto:') || contact.url.startsWith('tel:')
+
+              return (
+                <a
+                  key={`${contact.platform}-${idx}`}
+                  href={contact.url}
+                  target={isDirectAction ? undefined : '_blank'}
+                  rel={isDirectAction ? undefined : 'noopener noreferrer'}
+                  className={`group bg-[#FFFFFF] border border-[#E6E2D8] rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 flex items-center justify-between gap-4 ${styles.cardHover}`}
+                >
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <div
+                      className={`p-3 rounded-xl bg-[#F2EFE9] transition-all duration-300 ${styles.iconBox}`}
+                    >
+                      {renderContactIcon(contact.platform)}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs font-mono text-[#6B6661] uppercase tracking-wider">
+                        {contact.platform}
+                      </p>
+                      <p className="text-sm font-medium text-[#181716] truncate">
+                        {contact.label || contact.url}
+                      </p>
+                    </div>
+                  </div>
+                  <ArrowUpRight
+                    className={`w-4 h-4 text-[#6B6661] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200 shrink-0 ${styles.arrowHover}`}
+                  />
+                </a>
+              )
+            })}
           </div>
         </motion.section>
       )}

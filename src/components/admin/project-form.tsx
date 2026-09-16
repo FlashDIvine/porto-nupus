@@ -422,21 +422,21 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
-      {/* Top Bar Navigation */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E6E2D8]">
         <div className="flex items-center gap-4">
           <Link
             href="/admin"
-            className="p-2 rounded-xl bg-[#161616] border border-white/10 text-white/70 hover:text-white hover:border-white/20 transition-colors"
+            className="p-2 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] text-[#6B6661] hover:text-[#181716] hover:border-[#181716]/30 transition-colors shadow-2xs"
             title="Kembali ke Dashboard Admin"
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-[#D4FF00]">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#E26D5C]">
               {isEdit ? 'Mode Edit Proyek' : 'Tambah Proyek Baru'}
             </span>
-            <h1 className="font-heading text-2xl sm:text-3xl font-semibold text-white tracking-tight mt-0.5">
+            <h1 className="font-heading text-2xl sm:text-3xl font-semibold text-[#181716] tracking-tight mt-0.5 leading-[1.1]">
               {isEdit ? initialData?.title?.id || 'Edit Proyek' : 'Buat Karya Baru'}
             </h1>
           </div>
@@ -448,7 +448,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
             type="button"
             onClick={() => handleSubmit(false)}
             disabled={isSubmitting || isUploading}
-            className="px-4 py-2 rounded-xl bg-[#161616] border border-white/10 text-white/80 hover:text-white hover:border-white/30 text-xs font-mono uppercase tracking-wider transition-colors disabled:opacity-50"
+            className="px-4 py-2 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] text-[#181716] hover:bg-[#F2EFE9] text-xs font-mono uppercase tracking-wider transition-colors disabled:opacity-50 shadow-2xs"
           >
             Simpan Draft
           </button>
@@ -456,7 +456,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
             type="button"
             onClick={() => handleSubmit(true)}
             disabled={isSubmitting || isUploading}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#D4FF00] hover:bg-[#bce300] text-[#0a0a0a] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-md shadow-[#D4FF00]/10"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#181716] hover:bg-[#2B50EC] text-[#FAF8F5] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-xs"
           >
             {isSubmitting ? (
               <>
@@ -472,28 +472,28 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
 
       {/* Alerts */}
       {errorMessage && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm animate-in fade-in duration-200">
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-sm animate-in fade-in duration-200">
           <AlertTriangle className="w-5 h-5 shrink-0" />
           <p>{errorMessage}</p>
         </div>
       )}
 
       {successMessage && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-[#D4FF00]/10 border border-[#D4FF00]/30 text-[#D4FF00] text-sm animate-in fade-in duration-200">
-          <CheckCircle2 className="w-5 h-5 shrink-0" />
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-[#D8E2DC]/60 border border-[#E6E2D8] text-[#181716] text-sm animate-in fade-in duration-200">
+          <CheckCircle2 className="w-5 h-5 shrink-0 text-[#181716]" />
           <p>{successMessage}</p>
         </div>
       )}
 
       <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
         {/* Section 1: Detail Bahasa & Konten Utama */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#121212] border border-white/10 space-y-6">
-          <div className="border-b border-white/10 pb-4">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] space-y-6 shadow-xs">
+          <div className="border-b border-[#E6E2D8] pb-4">
             <div className="flex items-center gap-2">
-              <Layers className="w-5 h-5 text-[#D4FF00]" />
-              <h2 className="text-base font-medium text-white">Informasi & Deskripsi Proyek</h2>
+              <Layers className="w-5 h-5 text-[#E26D5C]" />
+              <h2 className="text-base font-medium text-[#181716]">Informasi &amp; Deskripsi Proyek</h2>
             </div>
-            <p className="text-xs text-white/50 mt-1">
+            <p className="text-xs text-[#6B6661] mt-1 font-body">
               Isi judul dan narasi proyek dalam Bahasa Indonesia dan Bahasa Inggris secara langsung tanpa perlu berpindah tab.
             </p>
           </div>
@@ -504,15 +504,15 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
             <div className="space-y-2">
               <label
                 htmlFor="field-title-id"
-                className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-white/80"
+                className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-[#181716]"
               >
                 <span className="flex items-center gap-1.5">
-                  <span className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-bold text-[#D4FF00]">
+                  <span className="px-1.5 py-0.5 rounded bg-[#D8E2DC] text-[10px] font-bold text-[#181716]">
                     ID
                   </span>
                   <span>Judul Proyek (Indonesia)</span>
                 </span>
-                <span className="text-[#D4FF00] font-bold">*</span>
+                <span className="text-[#E26D5C] font-bold">*</span>
               </label>
               <input
                 id="field-title-id"
@@ -520,14 +520,14 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                 value={titleId}
                 onChange={handleTitleIdChange}
                 placeholder="Contoh: Identitas Visual Lumina Coffee"
-                className={`w-full px-4 py-3 rounded-xl bg-[#161616] border text-white placeholder:text-white/30 focus:outline-none transition-all text-sm ${
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border text-[#181716] placeholder:text-[#6B6661]/50 focus:outline-none transition-all text-sm ${
                   fieldErrors.titleId
                     ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-                    : 'border-white/10 focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]'
+                    : 'border-[#E6E2D8] focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC]'
                 }`}
               />
               {fieldErrors.titleId && (
-                <p className="text-xs text-red-400 font-mono animate-in fade-in duration-200">
+                <p className="text-xs text-red-600 font-mono animate-in fade-in duration-200">
                   {fieldErrors.titleId}
                 </p>
               )}
@@ -537,15 +537,15 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
             <div className="space-y-2">
               <label
                 htmlFor="field-title-en"
-                className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-white/80"
+                className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-[#181716]"
               >
                 <span className="flex items-center gap-1.5">
-                  <span className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-bold text-sky-400">
+                  <span className="px-1.5 py-0.5 rounded bg-[#F2EFE9] text-[10px] font-bold text-[#6B6661]">
                     EN
                   </span>
                   <span>Project Title (English)</span>
                 </span>
-                <span className="text-white/40 text-[11px] font-normal lowercase">
+                <span className="text-[#6B6661] text-[11px] font-normal lowercase">
                   (wajib dipublikasikan)
                 </span>
               </label>
@@ -560,14 +560,14 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                   }
                 }}
                 placeholder="Example: Lumina Coffee Visual Identity & Packaging"
-                className={`w-full px-4 py-3 rounded-xl bg-[#161616] border text-white placeholder:text-white/30 focus:outline-none transition-all text-sm ${
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border text-[#181716] placeholder:text-[#6B6661]/50 focus:outline-none transition-all text-sm ${
                   fieldErrors.titleEn
                     ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-                    : 'border-white/10 focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]'
+                    : 'border-[#E6E2D8] focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC]'
                 }`}
               />
               {fieldErrors.titleEn && (
-                <p className="text-xs text-red-400 font-mono animate-in fade-in duration-200">
+                <p className="text-xs text-red-600 font-mono animate-in fade-in duration-200">
                   {fieldErrors.titleEn}
                 </p>
               )}
@@ -579,26 +579,26 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
             <div className="flex items-center justify-between">
               <label
                 htmlFor="field-slug"
-                className="block text-xs font-mono uppercase tracking-wider text-white/70"
+                className="block text-xs font-mono uppercase tracking-wider text-[#181716]"
               >
-                Slug URL <span className="text-[#D4FF00]">*</span>
+                Slug URL <span className="text-[#E26D5C]">*</span>
               </label>
               <button
                 type="button"
                 onClick={handleRegenerateSlug}
-                className="inline-flex items-center gap-1 text-[11px] font-mono text-[#D4FF00] hover:underline"
+                className="inline-flex items-center gap-1 text-[11px] font-mono text-[#2B50EC] hover:underline"
               >
                 <RefreshCw className="w-3 h-3" /> Auto-generate dari Judul
               </button>
             </div>
             <div
-              className={`flex rounded-xl bg-[#161616] border overflow-hidden transition-all ${
+              className={`flex rounded-xl bg-[#FAF8F5] border overflow-hidden transition-all ${
                 fieldErrors.slug
                   ? 'border-red-500/80 focus-within:border-red-500 focus-within:ring-1 focus-within:ring-red-500'
-                  : 'border-white/10 focus-within:border-[#D4FF00]'
+                  : 'border-[#E6E2D8] focus-within:border-[#2B50EC]'
               }`}
             >
-              <span className="px-3 py-3 text-xs font-mono text-white/40 bg-[#0a0a0a]/50 border-r border-white/10 select-none">
+              <span className="px-3 py-3 text-xs font-mono text-[#6B6661] bg-[#F2EFE9] border-r border-[#E6E2D8] select-none">
                 /project/
               </span>
               <input
@@ -613,15 +613,15 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                   }
                 }}
                 placeholder="lumina-coffee-visual-identity"
-                className="w-full px-4 py-3 bg-transparent text-white font-mono text-sm placeholder:text-white/30 focus:outline-none"
+                className="w-full px-4 py-3 bg-transparent text-[#181716] font-mono text-sm placeholder:text-[#6B6661]/50 focus:outline-none"
               />
             </div>
             {fieldErrors.slug ? (
-              <p className="text-xs text-red-400 font-mono animate-in fade-in duration-200">
+              <p className="text-xs text-red-600 font-mono animate-in fade-in duration-200">
                 {fieldErrors.slug}
               </p>
             ) : (
-              <p className="text-[11px] text-white/40 font-mono">
+              <p className="text-[11px] text-[#6B6661] font-mono">
                 Identifier unik halaman detail karya (huruf kecil, angka, dan tanda hubung).
               </p>
             )}
@@ -633,15 +633,15 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
             <div className="space-y-2">
               <label
                 htmlFor="field-desc-id"
-                className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-white/80"
+                className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-[#181716]"
               >
                 <span className="flex items-center gap-1.5">
-                  <span className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-bold text-[#D4FF00]">
+                  <span className="px-1.5 py-0.5 rounded bg-[#D8E2DC] text-[10px] font-bold text-[#181716]">
                     ID
                   </span>
                   <span>Deskripsi Narasi (Indonesia)</span>
                 </span>
-                <span className="text-white/40 text-[11px] font-normal lowercase">
+                <span className="text-[#6B6661] text-[11px] font-normal lowercase">
                   (wajib dipublikasikan)
                 </span>
               </label>
@@ -655,15 +655,15 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                     setFieldErrors((prev) => ({ ...prev, descId: undefined }))
                   }
                 }}
-                placeholder="Tuliskan latar belakang masalah, konsep visual, proses desain, tipografi, dan hasil karya..."
-                className={`w-full px-4 py-3 rounded-xl bg-[#161616] border text-white placeholder:text-white/30 focus:outline-none transition-all text-sm leading-relaxed ${
+                placeholder="Tuliskan latar belakang konsep, riset visual, filosofi perancangan, dan hasil akhir proyek ini..."
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border text-[#181716] placeholder:text-[#6B6661]/50 focus:outline-none transition-all text-sm leading-relaxed ${
                   fieldErrors.descId
                     ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-                    : 'border-white/10 focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]'
+                    : 'border-[#E6E2D8] focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC]'
                 }`}
               />
               {fieldErrors.descId && (
-                <p className="text-xs text-red-400 font-mono animate-in fade-in duration-200">
+                <p className="text-xs text-red-600 font-mono animate-in fade-in duration-200">
                   {fieldErrors.descId}
                 </p>
               )}
@@ -673,15 +673,15 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
             <div className="space-y-2">
               <label
                 htmlFor="field-desc-en"
-                className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-white/80"
+                className="flex items-center justify-between text-xs font-mono uppercase tracking-wider text-[#181716]"
               >
                 <span className="flex items-center gap-1.5">
-                  <span className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] font-bold text-sky-400">
+                  <span className="px-1.5 py-0.5 rounded bg-[#F2EFE9] text-[10px] font-bold text-[#6B6661]">
                     EN
                   </span>
-                  <span>Description & Narrative (English)</span>
+                  <span>Project Narrative (English)</span>
                 </span>
-                <span className="text-white/40 text-[11px] font-normal lowercase">
+                <span className="text-[#6B6661] text-[11px] font-normal lowercase">
                   (wajib dipublikasikan)
                 </span>
               </label>
@@ -695,11 +695,11 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                     setFieldErrors((prev) => ({ ...prev, descEn: undefined }))
                   }
                 }}
-                placeholder="Explain the brief, conceptual framework, visual system, typography, and project outcomes..."
-                className={`w-full px-4 py-3 rounded-xl bg-[#161616] border text-white placeholder:text-white/30 focus:outline-none transition-all text-sm leading-relaxed ${
+                placeholder="Write the concept context, typography exploration, and design outcomes in English..."
+                className={`w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border text-[#181716] placeholder:text-[#6B6661]/50 focus:outline-none transition-all text-sm leading-relaxed ${
                   fieldErrors.descEn
                     ? 'border-red-500/80 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-                    : 'border-white/10 focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00]'
+                    : 'border-[#E6E2D8] focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC]'
                 }`}
               />
               {fieldErrors.descEn && (
@@ -712,25 +712,25 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
         </div>
 
         {/* Section 2: Metadata & Kategori */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#121212] border border-white/10 space-y-6">
-          <div className="flex items-center gap-2 border-b border-white/10 pb-4">
-            <Tag className="w-5 h-5 text-[#D4FF00]" />
-            <h2 className="text-base font-medium text-white">Klasifikasi & Alat yang Digunakan</h2>
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] space-y-6 shadow-xs">
+          <div className="flex items-center gap-2 border-b border-[#E6E2D8] pb-4">
+            <Tag className="w-5 h-5 text-[#E26D5C]" />
+            <h2 className="text-base font-medium text-[#181716]">Klasifikasi & Alat yang Digunakan</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Category Dropdown */}
             <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
-                Kategori Desain <span className="text-[#D4FF00]">*</span>
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
+                Kategori Desain <span className="text-[#E26D5C] font-bold">*</span>
               </label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-white/10 text-white focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00] focus:outline-none transition-all text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC] focus:outline-none transition-all text-sm"
               >
                 {CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat} className="bg-[#121212] text-white">
+                  <option key={cat} value={cat} className="bg-[#FFFFFF] text-[#181716]">
                     {cat}
                   </option>
                 ))}
@@ -742,23 +742,23 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                   value={customCategory}
                   onChange={(e) => setCustomCategory(e.target.value)}
                   placeholder="Ketik kategori kustom..."
-                  className="w-full mt-2 px-4 py-2.5 rounded-xl bg-[#161616] border border-white/10 text-white text-sm focus:border-[#D4FF00] focus:outline-none"
+                  className="w-full mt-2 px-4 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] text-sm focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC] focus:outline-none"
                 />
               )}
             </div>
 
             {/* Display Order */}
             <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
                 Urutan Tampil (Display Order)
               </label>
               <input
                 type="number"
                 value={displayOrder}
                 onChange={(e) => setDisplayOrder(parseInt(e.target.value, 10) || 0)}
-                className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-white/10 text-white focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00] focus:outline-none transition-all text-sm font-mono"
+                className="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC] focus:outline-none transition-all text-sm font-mono"
               />
-              <p className="text-[11px] text-white/40 font-mono">
+              <p className="text-[11px] text-[#6B6661] font-mono">
                 Angka lebih kecil tampil lebih awal di grid portfolio.
               </p>
             </div>
@@ -766,21 +766,21 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
 
           {/* Tools Used (Tag Input) */}
           <div className="space-y-3">
-            <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
+            <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
               Tools & Software yang Digunakan (Tekan Enter atau Koma)
             </label>
 
-            <div className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-[#161616] border border-white/10 focus-within:border-[#D4FF00]">
+            <div className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus-within:border-[#2B50EC]">
               {tools.map((tool) => (
                 <span
                   key={tool}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#222] text-[#D4FF00] text-xs font-mono border border-white/5"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#D8E2DC]/60 text-[#181716] text-xs font-mono border border-[#E6E2D8]"
                 >
                   <span>{tool}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveTool(tool)}
-                    className="text-white/40 hover:text-white transition-colors"
+                    className="text-[#6B6661] hover:text-[#181716] transition-colors"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -794,16 +794,16 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                 onKeyDown={handleToolKeyDown}
                 onBlur={handleAddTool}
                 placeholder={tools.length === 0 ? 'Ketik nama tool (misal: Illustrator, Figma, Glyphs)...' : ''}
-                className="flex-1 min-w-[140px] bg-transparent text-sm text-white placeholder:text-white/30 focus:outline-none px-1 py-0.5"
+                className="flex-1 min-w-[140px] bg-transparent text-sm text-[#181716] placeholder:text-[#6B6661]/50 focus:outline-none px-1 py-0.5"
               />
             </div>
           </div>
 
           {/* Publish Toggle */}
-          <div className="flex items-center justify-between p-4 rounded-xl bg-[#161616] border border-white/10">
+          <div className="flex items-center justify-between p-4 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8]">
             <div>
-              <p className="text-sm font-medium text-white">Status Publikasi</p>
-              <p className="text-xs text-white/50">
+              <p className="text-sm font-medium text-[#181716]">Status Publikasi</p>
+              <p className="text-xs text-[#6B6661]">
                 Jika diaktifkan, proyek akan langsung dapat dilihat oleh publik di halaman utama.
               </p>
             </div>
@@ -813,11 +813,11 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
               aria-checked={isPublished}
               onClick={() => setIsPublished(!isPublished)}
               className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                isPublished ? 'bg-[#D4FF00]' : 'bg-white/20'
+                isPublished ? 'bg-[#181716]' : 'bg-[#E6E2D8]'
               }`}
             >
               <span
-                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-[#0a0a0a] shadow-lg ring-0 transition duration-200 ease-in-out ${
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-[#FAF8F5] shadow-sm ring-0 transition duration-200 ease-in-out ${
                   isPublished ? 'translate-x-5' : 'translate-x-0'
                 }`}
               />
@@ -828,19 +828,19 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
         {/* Section 3: Manajemen Gambar Galeri & Cover */}
         <div
           id="section-images"
-          className={`p-6 sm:p-8 rounded-2xl bg-[#121212] border space-y-6 transition-all ${
+          className={`p-6 sm:p-8 rounded-2xl bg-[#FFFFFF] border space-y-6 transition-all shadow-xs ${
             fieldErrors.images
               ? 'border-red-500/80 ring-1 ring-red-500/30'
-              : 'border-white/10'
+              : 'border-[#E6E2D8]'
           }`}
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E6E2D8] pb-4">
             <div>
               <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#D4FF00]" />
-                <h2 className="text-base font-medium text-white">Galeri Gambar & Sampul (Cover)</h2>
+                <Sparkles className="w-5 h-5 text-[#E26D5C]" />
+                <h2 className="text-base font-medium text-[#181716]">Galeri Gambar & Sampul (Cover)</h2>
               </div>
-              <p className="text-xs text-white/50 mt-1">
+              <p className="text-xs text-[#6B6661] mt-1">
                 Unggah hingga 15 gambar berkualitas tinggi (JPG, PNG, WebP). Sharp akan otomatis mengompresi ke WebP maks 2560px.
               </p>
             </div>
@@ -849,12 +849,12 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploading || images.length >= 15}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#161616] border border-white/10 hover:border-[#D4FF00] text-white text-xs font-mono uppercase tracking-wider transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#181716] text-[#181716] text-xs font-mono uppercase tracking-wider transition-all disabled:opacity-50"
             >
               {isUploading ? (
-                <Loader2 className="w-4 h-4 animate-spin text-[#D4FF00]" />
+                <Loader2 className="w-4 h-4 animate-spin text-[#181716]" />
               ) : (
-                <Upload className="w-4 h-4 text-[#D4FF00]" />
+                <Upload className="w-4 h-4 text-[#181716]" />
               )}
               <span>Unggah Gambar ({images.length}/15)</span>
             </button>
@@ -870,7 +870,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
 
           {/* Image error alert */}
           {fieldErrors.images && (
-            <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono animate-in fade-in duration-200">
+            <div className="flex items-center gap-2.5 p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-xs font-mono animate-in fade-in duration-200">
               <AlertTriangle className="w-4 h-4 shrink-0" />
               <span>{fieldErrors.images}</span>
             </div>
@@ -878,7 +878,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
 
           {/* Upload Progress Status */}
           {uploadProgressText && (
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-[#161616] border border-[#D4FF00]/30 text-xs font-mono text-[#D4FF00] animate-pulse">
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-[#FAF8F5] border border-[#E26D5C]/40 text-xs font-mono text-[#E26D5C] animate-pulse">
               <Loader2 className="w-4 h-4 animate-spin shrink-0" />
               <span>{uploadProgressText}</span>
             </div>
@@ -888,19 +888,19 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
           {images.length === 0 ? (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className={`py-12 border-2 border-dashed rounded-2xl bg-[#161616]/40 flex flex-col items-center justify-center cursor-pointer transition-colors p-6 text-center space-y-3 ${
+              className={`py-12 border-2 border-dashed rounded-2xl bg-[#FAF8F5] flex flex-col items-center justify-center cursor-pointer transition-colors p-6 text-center space-y-3 ${
                 fieldErrors.images
                   ? 'border-red-500/60 hover:border-red-500'
-                  : 'border-white/10 hover:border-white/20'
+                  : 'border-[#E6E2D8] hover:border-[#6B6661]'
               }`}
             >
-              <div className="p-4 rounded-full bg-[#121212] text-white/40">
+              <div className="p-4 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-[#6B6661] shadow-2xs">
                 <Upload className="w-6 h-6" />
               </div>
-              <p className="text-sm font-medium text-white/70">
+              <p className="text-sm font-medium text-[#181716]">
                 Klik untuk memilih dan mengunggah gambar proyek
               </p>
-              <p className="text-xs text-white/40 font-mono">
+              <p className="text-xs text-[#6B6661] font-mono">
                 Format: JPEG, PNG, WebP • Maksimum 25MB per file • Maks 15 gambar
               </p>
             </div>
@@ -918,13 +918,13 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                     key={img.url + index}
                     className={`p-4 rounded-xl border transition-all ${
                       isCover
-                        ? 'bg-[#161616] border-[#D4FF00]/40 ring-1 ring-[#D4FF00]/20'
-                        : 'bg-[#161616] border-white/5 hover:border-white/20'
+                        ? 'bg-[#FAF8F5] border-[#E26D5C]/60 ring-1 ring-[#E26D5C]/20'
+                        : 'bg-[#FAF8F5] border-[#E6E2D8] hover:border-[#6B6661]'
                     }`}
                   >
                     <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
                       {/* Image Thumbnail Preview */}
-                      <div className="relative w-28 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-black/40 border border-white/10">
+                      <div className="relative w-28 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-[#F2EFE9] border border-[#E6E2D8]">
                         <Image
                           src={img.url}
                           alt={`Project image ${index + 1}`}
@@ -933,7 +933,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                           sizes="150px"
                         />
                         {isCover && (
-                          <div className="absolute top-1 left-1 bg-[#D4FF00] text-[#0a0a0a] text-[10px] font-mono font-bold px-1.5 py-0.5 rounded shadow">
+                          <div className="absolute top-1 left-1 bg-[#E26D5C] text-[#FAF8F5] text-[10px] font-mono font-bold px-1.5 py-0.5 rounded shadow">
                             COVER
                           </div>
                         )}
@@ -947,14 +947,14 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                             value={capObj.id || ''}
                             onChange={(e) => handleUpdateCaption(index, 'id', e.target.value)}
                             placeholder="Caption gambar (Indonesia)..."
-                            className="w-full px-3 py-1.5 rounded-lg bg-[#121212] border border-white/10 text-xs text-white placeholder:text-white/30 focus:border-[#D4FF00] focus:outline-none"
+                            className="w-full px-3 py-1.5 rounded-lg bg-[#FFFFFF] border border-[#E6E2D8] text-xs text-[#181716] placeholder:text-[#6B6661]/50 focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC] focus:outline-none"
                           />
                           <input
                             type="text"
                             value={capObj.en || ''}
                             onChange={(e) => handleUpdateCaption(index, 'en', e.target.value)}
                             placeholder="Caption gambar (English)..."
-                            className="w-full px-3 py-1.5 rounded-lg bg-[#121212] border border-white/10 text-xs text-white placeholder:text-white/30 focus:border-[#D4FF00] focus:outline-none"
+                            className="w-full px-3 py-1.5 rounded-lg bg-[#FFFFFF] border border-[#E6E2D8] text-xs text-[#181716] placeholder:text-[#6B6661]/50 focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC] focus:outline-none"
                           />
                         </div>
 
@@ -970,8 +970,8 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                             }}
                             className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono transition-colors ${
                               isCover
-                                ? 'bg-[#D4FF00] text-[#0a0a0a] font-semibold'
-                                : 'bg-[#121212] text-white/60 hover:text-white border border-white/10'
+                                ? 'bg-[#E26D5C] text-[#FAF8F5] font-semibold'
+                                : 'bg-[#FFFFFF] text-[#6B6661] hover:text-[#181716] border border-[#E6E2D8]'
                             }`}
                           >
                             <Star className={`w-3.5 h-3.5 ${isCover ? 'fill-current' : ''}`} />
@@ -983,12 +983,12 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                             onClick={() => handleToggleHighlight(index)}
                             className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono transition-colors ${
                               img.is_highlight
-                                ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
-                                : 'bg-[#121212] text-white/50 hover:text-white border border-white/10'
+                                ? 'bg-[#D8E2DC] text-[#181716] font-semibold border border-[#E6E2D8]'
+                                : 'bg-[#FFFFFF] text-[#6B6661] hover:text-[#181716] border border-[#E6E2D8]'
                             }`}
                             title="Tampilkan di kurasi gambar pilihan halaman /gallery"
                           >
-                            <Sparkles className="w-3.5 h-3.5" />
+                            <Sparkles className="w-3.5 h-3.5 text-[#E26D5C]" />
                             <span>Highlight Galeri: {img.is_highlight ? 'Ya' : 'Tidak'}</span>
                           </button>
                         </div>
@@ -1000,7 +1000,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                           type="button"
                           onClick={() => handleMoveImage(index, index - 1)}
                           disabled={index === 0}
-                          className="p-1.5 rounded-lg bg-[#121212] text-white/50 hover:text-white disabled:opacity-30 transition-colors"
+                          className="p-1.5 rounded-lg bg-[#FFFFFF] text-[#6B6661] hover:text-[#181716] hover:bg-[#F2EFE9] border border-[#E6E2D8] disabled:opacity-30 transition-colors shadow-2xs"
                           title="Pindah ke Atas"
                         >
                           <ChevronUp className="w-4 h-4" />
@@ -1009,7 +1009,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                           type="button"
                           onClick={() => handleMoveImage(index, index + 1)}
                           disabled={index === images.length - 1}
-                          className="p-1.5 rounded-lg bg-[#121212] text-white/50 hover:text-white disabled:opacity-30 transition-colors"
+                          className="p-1.5 rounded-lg bg-[#FFFFFF] text-[#6B6661] hover:text-[#181716] hover:bg-[#F2EFE9] border border-[#E6E2D8] disabled:opacity-30 transition-colors shadow-2xs"
                           title="Pindah ke Bawah"
                         >
                           <ChevronDown className="w-4 h-4" />
@@ -1017,7 +1017,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                         <button
                           type="button"
                           onClick={() => handleDeleteImage(index)}
-                          className="p-1.5 rounded-lg bg-[#121212] text-red-400 hover:bg-red-500/10 transition-colors"
+                          className="p-1.5 rounded-lg bg-[#FFFFFF] text-red-600 hover:bg-red-50 border border-[#E6E2D8] transition-colors shadow-2xs"
                           title="Hapus Gambar"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -1032,10 +1032,10 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
         </div>
 
         {/* Sticky/Bottom Actions */}
-        <div className="flex items-center justify-between pt-6 border-t border-white/10">
+        <div className="flex items-center justify-between pt-6 border-t border-[#E6E2D8]">
           <Link
             href="/admin"
-            className="text-xs font-mono text-white/50 hover:text-white transition-colors"
+            className="text-xs font-mono text-[#6B6661] hover:text-[#181716] transition-colors"
           >
             ← Batal & Kembali
           </Link>
@@ -1046,7 +1046,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                 type="button"
                 onClick={() => handleSubmit(isPublished)}
                 disabled={isSubmitting || isUploading}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#D4FF00] hover:bg-[#bce300] text-[#0a0a0a] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-md shadow-[#D4FF00]/10"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#181716] hover:bg-[#2B50EC] text-[#FAF8F5] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-xs"
               >
                 {isSubmitting ? (
                   <>
@@ -1063,7 +1063,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                   type="button"
                   onClick={() => handleSubmit(false)}
                   disabled={isSubmitting || isUploading}
-                  className="px-5 py-2.5 rounded-xl bg-[#161616] border border-white/10 text-white/80 hover:text-white hover:border-white/30 text-xs font-mono uppercase tracking-wider transition-colors disabled:opacity-50"
+                  className="px-5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] hover:bg-[#F2EFE9] text-xs font-mono uppercase tracking-wider transition-colors disabled:opacity-50 shadow-2xs"
                 >
                   Simpan Draft
                 </button>
@@ -1071,7 +1071,7 @@ export function ProjectForm({ initialData, isEdit = false }: ProjectFormProps) {
                   type="button"
                   onClick={() => handleSubmit(true)}
                   disabled={isSubmitting || isUploading}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#D4FF00] hover:bg-[#bce300] text-[#0a0a0a] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-md shadow-[#D4FF00]/10"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#181716] hover:bg-[#2B50EC] text-[#FAF8F5] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-xs"
                 >
                   {isSubmitting ? (
                     <>

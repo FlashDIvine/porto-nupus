@@ -1,29 +1,17 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Globe } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useLanguage } from '@/context/language-context'
 
 export function Navbar() {
   const { setLanguage, isId } = useLanguage()
-  const [isScrolled, setIsScrolled] = useState(false)
+  const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
-    }
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const navContainerRef = useRef<HTMLDivElement>(null)
 
   const navLinks = [
     { href: '/', label: isId ? 'Beranda' : 'Home' },
@@ -31,156 +19,249 @@ export function Navbar() {
     { href: '/about', label: isId ? 'Tentang' : 'About' },
   ]
 
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/'
+    }
+    if (href === '/gallery') {
+      return pathname === '/gallery' || pathname.startsWith('/gallery/') || pathname.startsWith('/project/')
+    }
+    return pathname === href || pathname.startsWith(href + '/')
+  }
+
+
+  // Handle escape key and outside clicks for mobile menu
+  useEffect(() => {
+    if (!mobileMenuOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false)
+      }
+    }
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (navContainerRef.current && !navContainerRef.current.contains(e.target as Node)) {
+        setMobileMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [mobileMenuOpen])
+
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/40 py-3.5'
-          : 'bg-transparent border-b border-transparent py-5'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Logo / Name */}
-        <Link
-          href="/"
-          className="group flex items-center gap-1.5 focus:outline-none"
-        >
-          <span className="font-heading text-xl sm:text-2xl font-semibold tracking-tight text-white group-hover:text-white/90 transition-colors">
-            Portofolio<span className="text-[#D4FF00]">.</span>
-          </span>
-          <span className="text-xs uppercase tracking-widest font-mono text-white/50 border border-white/10 px-1.5 py-0.5 rounded ml-1">
-            DKV
-          </span>
-        </Link>
-
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-[#D4FF00] transition-colors relative py-1"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Desktop Language Toggle & Actions */}
-        <div className="hidden md:flex items-center gap-4">
-          <div className="flex items-center p-1 rounded-full bg-[#161616] border border-white/10">
-            <button
-              type="button"
-              onClick={() => setLanguage('id')}
-              className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
-                isId
-                  ? 'bg-[#D4FF00] text-[#0a0a0a] shadow-sm'
-                  : 'text-white/60 hover:text-white'
-              }`}
-              aria-label="Bahasa Indonesia"
-            >
-              ID
-            </button>
-            <button
-              type="button"
-              onClick={() => setLanguage('en')}
-              className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
-                !isId
-                  ? 'bg-[#D4FF00] text-[#0a0a0a] shadow-sm'
-                  : 'text-white/60 hover:text-white'
-              }`}
-              aria-label="English Language"
-            >
-              EN
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Hamburger Button */}
-        <div className="flex md:hidden items-center gap-3">
-          {/* Compact language switch for mobile header */}
-          <button
-            type="button"
-            onClick={() => setLanguage(isId ? 'en' : 'id')}
-            className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#161616] border border-white/10 text-white/80"
-            aria-label="Toggle language"
-          >
-            <Globe className="w-3 h-3 text-[#D4FF00]" />
-            <span>{isId ? 'ID' : 'EN'}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-[#161616] border border-white/10 text-white/80 hover:text-white hover:border-white/30 focus:outline-none"
-            aria-label={mobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
-          >
-            {mobileMenuOpen ? (
-              <X className="w-5 h-5 text-[#D4FF00]" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu Overlay & Drawer */}
+    <>
+      {/* Full-viewport mobile backdrop placed outside any backdrop-filter containing block */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="md:hidden border-b border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl overflow-hidden"
-          >
-            <div className="px-4 pt-3 pb-6 space-y-4">
-              <nav className="flex flex-col space-y-3">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-base font-medium text-white/80 hover:text-[#D4FF00] py-2 border-b border-white/5 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-
-              <div className="pt-2 flex items-center justify-between">
-                <span className="text-xs text-white/50 uppercase tracking-wider font-mono">
-                  {isId ? 'Bahasa / Language' : 'Language / Bahasa'}
-                </span>
-                <div className="flex items-center p-1 rounded-full bg-[#161616] border border-white/10">
-                  <button
-                    type="button"
-                    onClick={() => setLanguage('id')}
-                    className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
-                      isId
-                        ? 'bg-[#D4FF00] text-[#0a0a0a]'
-                        : 'text-white/60 hover:text-white'
-                    }`}
-                  >
-                    ID
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setLanguage('en')}
-                    className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
-                      !isId
-                        ? 'bg-[#D4FF00] text-[#0a0a0a]'
-                        : 'text-white/60 hover:text-white'
-                    }`}
-                  >
-                    EN
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 z-40 bg-[#181716]/15 backdrop-blur-[2px] md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
         )}
       </AnimatePresence>
-    </header>
+
+      <header className="sticky top-6 z-50 mx-auto max-w-fit px-4 transition-all duration-300">
+        <div
+          ref={navContainerRef}
+          className="relative flex items-center justify-between gap-5 sm:gap-7 px-4 sm:px-6 py-2.5 rounded-full backdrop-blur-md bg-[#FAF8F5]/85 border border-[#E6E2D8] shadow-sm"
+        >
+          {/* Logo: Editorial serif wordmark "Portofolio." with a small monospace badge "[DKV]" */}
+          <Link
+            href="/"
+            className="group flex items-center gap-2 focus:outline-none shrink-0"
+          >
+            <span className="font-heading text-xl sm:text-2xl font-semibold tracking-tight text-[#181716] group-hover:text-[#2B50EC] transition-colors">
+              Portofolio<span className="text-[#E26D5C]">.</span>
+            </span>
+            <span className="text-[10px] sm:text-xs font-mono text-[#6B6661] bg-[#F2EFE9] border border-[#E6E2D8] px-1.5 py-0.5 rounded tracking-wider">
+              [DKV]
+            </span>
+          </Link>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1.5">
+            {navLinks.map((link) => {
+              const active = isActive(link.href)
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm ${
+                    active
+                      ? 'bg-[#E26D5C] text-white font-medium px-3.5 py-1.5 rounded-full transition-all duration-200 shadow-sm'
+                      : 'text-[#181716] hover:text-[#E26D5C] hover:bg-[#F2EFE9] active:bg-[#E26D5C] active:text-white px-3.5 py-1.5 rounded-full transition-colors active:scale-95'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* Desktop Language Switcher */}
+          <div className="hidden md:flex items-center shrink-0">
+            <div
+              className="relative flex items-center p-1 rounded-full bg-[#F2EFE9] border border-[#E6E2D8]"
+              role="group"
+              aria-label="Language selection"
+            >
+              <button
+                type="button"
+                onClick={() => setLanguage('id')}
+                aria-pressed={isId}
+                className={`relative z-10 px-3 py-1 text-xs font-semibold rounded-full transition-colors duration-200 focus:outline-none cursor-pointer select-none active:scale-95 ${
+                  isId
+                    ? 'text-white'
+                    : 'text-[#6B6661] hover:text-[#181716]'
+                }`}
+                aria-label="Bahasa Indonesia"
+              >
+                {isId && (
+                  <motion.div
+                    layoutId="active-lang-pill-desktop"
+                    className="absolute inset-0 rounded-full bg-[#E26D5C] shadow-xs"
+                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10">ID</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                aria-pressed={!isId}
+                className={`relative z-10 px-3 py-1 text-xs font-semibold rounded-full transition-colors duration-200 focus:outline-none cursor-pointer select-none active:scale-95 ${
+                  !isId
+                    ? 'text-white'
+                    : 'text-[#6B6661] hover:text-[#181716]'
+                }`}
+                aria-label="English Language"
+              >
+                {!isId && (
+                  <motion.div
+                    layoutId="active-lang-pill-desktop"
+                    className="absolute inset-0 rounded-full bg-[#E26D5C] shadow-xs"
+                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10">EN</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Actions: Animated language switch + Hamburger */}
+          <div className="flex md:hidden items-center gap-2">
+            <div
+              className="relative flex items-center p-0.5 rounded-full bg-[#F2EFE9] border border-[#E6E2D8]"
+              role="group"
+              aria-label="Language selection"
+            >
+              <button
+                type="button"
+                onClick={() => setLanguage('id')}
+                aria-pressed={isId}
+                className={`relative z-10 px-2.5 py-1 text-xs font-semibold rounded-full transition-colors duration-200 focus:outline-none cursor-pointer select-none active:scale-95 ${
+                  isId
+                    ? 'text-white'
+                    : 'text-[#6B6661] hover:text-[#181716]'
+                }`}
+                aria-label="Bahasa Indonesia"
+              >
+                {isId && (
+                  <motion.div
+                    layoutId="active-lang-pill-mobile"
+                    className="absolute inset-0 rounded-full bg-[#E26D5C] shadow-xs"
+                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10">ID</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                aria-pressed={!isId}
+                className={`relative z-10 px-2.5 py-1 text-xs font-semibold rounded-full transition-colors duration-200 focus:outline-none cursor-pointer select-none active:scale-95 ${
+                  !isId
+                    ? 'text-white'
+                    : 'text-[#6B6661] hover:text-[#181716]'
+                }`}
+                aria-label="English Language"
+              >
+                {!isId && (
+                  <motion.div
+                    layoutId="active-lang-pill-mobile"
+                    className="absolute inset-0 rounded-full bg-[#E26D5C] shadow-xs"
+                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                  />
+                )}
+                <span className="relative z-10">EN</span>
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-1.5 rounded-full bg-[#F2EFE9] border border-[#E6E2D8] text-[#181716] hover:text-[#E26D5C] focus:outline-none transition-colors cursor-pointer"
+              aria-label={mobileMenuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav-panel"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-4 h-4 text-[#E26D5C]" />
+              ) : (
+                <Menu className="w-4 h-4" />
+              )}
+            </button>
+          </div>
+
+          {/* Mobile Dropdown Panel */}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div
+                id="mobile-nav-panel"
+                initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-full left-0 right-0 mt-3 p-3 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] shadow-lg md:hidden overflow-hidden z-50 min-w-[240px]"
+              >
+                <nav className="flex flex-col space-y-1.5">
+                  {navLinks.map((link) => {
+                    const active = isActive(link.href)
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`text-sm text-center ${
+                          active
+                            ? 'bg-[#E26D5C] text-white font-medium px-3.5 py-1.5 rounded-full transition-all duration-200 shadow-sm'
+                            : 'text-[#181716] hover:text-[#E26D5C] hover:bg-[#F2EFE9] active:bg-[#E26D5C] active:text-white px-3.5 py-1.5 rounded-full transition-colors'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    )
+                  })}
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </header>
+    </>
   )
 }

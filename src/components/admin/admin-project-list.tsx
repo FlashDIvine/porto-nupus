@@ -72,32 +72,32 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
       {/* Top Header & Actions */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#E6E2D8]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#D4FF00]">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#E26D5C]">
               Dashboard
             </span>
-            <span className="text-xs text-white/30">•</span>
-            <span className="text-xs font-mono text-white/50">{projects.length} Proyek Terdaftar</span>
+            <span className="text-xs text-[#6B6661]/40">•</span>
+            <span className="text-xs font-mono text-[#6B6661]">{projects.length} Proyek Terdaftar</span>
           </div>
-          <h1 className="font-heading text-3xl font-semibold text-white tracking-tight mt-1">
-            Manajemen Karya & Proyek
+          <h1 className="font-heading text-3xl font-semibold text-[#181716] tracking-tight mt-1 leading-[1.1]">
+            Manajemen Karya &amp; Proyek
           </h1>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
           <Link
             href="/admin/profile"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#161616] border border-white/10 text-white/80 hover:text-white hover:border-white/30 text-xs font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] text-[#181716] hover:border-[#181716]/40 hover:bg-[#F2EFE9] text-xs font-medium transition-colors shadow-2xs"
           >
-            <User className="w-4 h-4 text-[#D4FF00]" />
+            <User className="w-4 h-4 text-[#E26D5C]" />
             <span>Edit Profil / About</span>
           </Link>
 
           <Link
             href="/admin/projects/new"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#D4FF00] hover:bg-[#bce300] text-[#0a0a0a] font-semibold text-xs transition-all shadow-md shadow-[#D4FF00]/10"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#181716] hover:bg-[#2B50EC] text-[#FAF8F5] font-medium text-xs transition-all shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>+ New Project</span>
@@ -107,7 +107,7 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
             type="button"
             onClick={handleLogout}
             disabled={isLoggingOut}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#161616] border border-white/10 text-white/60 hover:text-red-400 hover:border-red-400/30 text-xs font-medium transition-colors disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] text-[#6B6661] hover:text-red-600 hover:border-red-300 text-xs font-medium transition-colors disabled:opacity-50 shadow-2xs"
             title="Keluar dari sesi admin"
           >
             {isLoggingOut ? (
@@ -125,12 +125,12 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
         <div
           className={`flex items-center gap-3 p-4 rounded-xl text-xs font-mono animate-in fade-in duration-200 ${
             feedback.type === 'success'
-              ? 'bg-[#D4FF00]/10 border border-[#D4FF00]/30 text-[#D4FF00]'
-              : 'bg-red-500/10 border border-red-500/20 text-red-400'
+              ? 'bg-[#D8E2DC]/60 border border-[#E6E2D8] text-[#181716]'
+              : 'bg-red-500/10 border border-red-500/20 text-red-600'
           }`}
         >
           {feedback.type === 'success' ? (
-            <CheckCircle2 className="w-4 h-4 shrink-0" />
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-[#181716]" />
           ) : (
             <AlertTriangle className="w-4 h-4 shrink-0" />
           )}
@@ -140,29 +140,29 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
 
       {/* Projects Table / List */}
       {projects.length === 0 ? (
-        <div className="py-20 text-center rounded-2xl border border-dashed border-white/10 bg-[#121212]/50 p-8 space-y-4">
-          <p className="text-white/60 font-body text-sm">Belum ada proyek yang dibuat.</p>
+        <div className="py-20 text-center rounded-xl border border-dashed border-[#E6E2D8] bg-[#FFFFFF] p-8 space-y-4 shadow-xs">
+          <p className="text-[#6B6661] font-body text-sm">Belum ada proyek yang dibuat.</p>
           <Link
             href="/admin/projects/new"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#D4FF00] text-[#0a0a0a] font-semibold text-xs uppercase tracking-wider"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#181716] text-[#FAF8F5] font-medium text-xs uppercase tracking-wider hover:bg-[#2B50EC] transition-all shadow-xs"
           >
             <Plus className="w-4 h-4" /> Buat Proyek Pertama
           </Link>
         </div>
       ) : (
-        <div className="rounded-2xl border border-white/10 bg-[#121212] overflow-hidden shadow-xl">
+        <div className="rounded-xl border border-[#E6E2D8] bg-[#FFFFFF] overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-white/80">
-              <thead className="text-xs uppercase font-mono text-white/40 bg-[#0e0e0e] border-b border-white/10">
+            <table className="w-full text-left text-sm text-[#181716]">
+              <thead className="text-xs uppercase font-mono text-[#6B6661] bg-[#F2EFE9] border-b border-[#E6E2D8]">
                 <tr>
-                  <th scope="col" className="px-6 py-4">Thumbnail & Judul</th>
+                  <th scope="col" className="px-6 py-4">Thumbnail &amp; Judul</th>
                   <th scope="col" className="px-6 py-4">Kategori</th>
                   <th scope="col" className="px-6 py-4">Urutan</th>
                   <th scope="col" className="px-6 py-4">Status</th>
                   <th scope="col" className="px-6 py-4 text-right">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-[#E6E2D8]">
                 {projects.map((project) => {
                   const titleStr =
                     typeof project.title === 'object' && project.title !== null
@@ -172,12 +172,12 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
                   return (
                     <tr
                       key={project.id}
-                      className="hover:bg-white/[0.02] transition-colors group"
+                      className="hover:bg-[#FAF8F5] transition-colors group"
                     >
                       {/* Thumbnail & Title */}
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-4">
-                          <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-[#1a1a1a] border border-white/10 shrink-0">
+                          <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-[#F2EFE9] border border-[#E6E2D8] shrink-0">
                             {project.cover_image_url ? (
                               <Image
                                 src={project.cover_image_url}
@@ -187,16 +187,16 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
                                 className="object-cover"
                               />
                             ) : (
-                              <div className="w-full h-full flex items-center justify-center text-[10px] text-white/30 font-mono">
+                              <div className="w-full h-full flex items-center justify-center text-[10px] text-[#6B6661] font-mono">
                                 No img
                               </div>
                             )}
                           </div>
                           <div className="min-w-0">
-                            <p className="font-heading text-base font-medium text-white group-hover:text-[#D4FF00] transition-colors truncate max-w-xs sm:max-w-md">
+                            <p className="font-heading text-base font-semibold text-[#181716] group-hover:text-[#2B50EC] transition-colors truncate max-w-xs sm:max-w-md">
                               {titleStr}
                             </p>
-                            <p className="text-xs text-white/40 font-mono truncate">
+                            <p className="text-xs text-[#6B6661] font-mono truncate">
                               /{project.slug}
                             </p>
                           </div>
@@ -205,26 +205,26 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
 
                       {/* Category */}
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="text-xs font-mono text-white/70 bg-[#161616] px-2.5 py-1 rounded-md border border-white/10">
+                        <span className="text-xs font-mono text-[#181716] bg-[#F2EFE9] px-2.5 py-1 rounded-md border border-[#E6E2D8]">
                           {project.category || '—'}
                         </span>
                       </td>
 
                       {/* Display Order */}
-                      <td className="px-6 py-4 whitespace-nowrap font-mono text-xs text-white/50">
+                      <td className="px-6 py-4 whitespace-nowrap font-mono text-xs text-[#6B6661]">
                         #{project.display_order}
                       </td>
 
                       {/* Status Badge */}
                       <td className="px-6 py-4 whitespace-nowrap">
                         {project.is_published ? (
-                          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#D4FF00] bg-[#D4FF00]/10 border border-[#D4FF00]/30 px-2.5 py-0.5 rounded-full">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#D4FF00]" />
+                          <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#181716] bg-[#D8E2DC] border border-[#E6E2D8] px-2.5 py-0.5 rounded-full">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#181716]" />
                             Published
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-amber-400 bg-amber-400/10 border border-amber-400/20 px-2.5 py-0.5 rounded-full">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                          <span className="inline-flex items-center gap-1.5 text-xs font-mono text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                             Draft
                           </span>
                         )}
@@ -236,7 +236,7 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
                           <Link
                             href={`/project/${project.slug}`}
                             target="_blank"
-                            className="p-2 rounded-lg bg-[#161616] border border-white/10 text-white/60 hover:text-white hover:border-white/30 transition-colors"
+                            className="p-2 rounded-lg bg-[#FAF8F5] border border-[#E6E2D8] text-[#6B6661] hover:text-[#2B50EC] hover:border-[#2B50EC] transition-colors shadow-2xs"
                             title="Buka pratinjau publik"
                           >
                             <ExternalLink className="w-4 h-4" />
@@ -244,7 +244,7 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
 
                           <Link
                             href={`/admin/projects/${project.id}/edit`}
-                            className="p-2 rounded-lg bg-[#161616] border border-white/10 text-white/60 hover:text-[#D4FF00] hover:border-[#D4FF00]/40 transition-colors"
+                            className="p-2 rounded-lg bg-[#FAF8F5] border border-[#E6E2D8] text-[#6B6661] hover:text-[#2B50EC] hover:border-[#2B50EC] transition-colors shadow-2xs"
                             title="Edit proyek"
                           >
                             <Edit className="w-4 h-4" />
@@ -253,7 +253,7 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
                           <button
                             type="button"
                             onClick={() => setDeleteTarget(project)}
-                            className="p-2 rounded-lg bg-[#161616] border border-white/10 text-white/60 hover:text-red-400 hover:border-red-400/40 transition-colors"
+                            className="p-2 rounded-lg bg-[#FAF8F5] border border-[#E6E2D8] text-[#6B6661] hover:text-red-600 hover:border-red-300 transition-colors shadow-2xs"
                             title="Hapus proyek"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -271,20 +271,20 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
 
       {/* Confirmation Dialog (AlertDialog) */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="w-full max-w-md p-6 rounded-2xl bg-[#121212] border border-white/10 shadow-2xl space-y-4">
-            <div className="flex items-center gap-3 text-red-400">
-              <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#181716]/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="w-full max-w-md p-6 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] shadow-2xl space-y-4">
+            <div className="flex items-center gap-3 text-red-600">
+              <div className="p-2.5 rounded-xl bg-red-50 border border-red-200">
                 <AlertTriangle className="w-5 h-5" />
               </div>
-              <h3 className="font-heading text-lg font-semibold text-white">
+              <h3 className="font-heading text-xl font-semibold text-[#181716]">
                 Hapus Proyek Ini?
               </h3>
             </div>
 
-            <p className="text-xs text-white/70 font-body leading-relaxed">
+            <p className="text-xs text-[#6B6661] font-body leading-relaxed">
               Anda akan menghapus proyek{' '}
-              <strong className="text-white">
+              <strong className="text-[#181716]">
                 &ldquo;
                 {typeof deleteTarget.title === 'object' && deleteTarget.title !== null
                   ? deleteTarget.title.id || deleteTarget.title.en
@@ -294,12 +294,12 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
               . Data yang sudah dihapus tidak dapat dipulihkan kembali.
             </p>
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E6E2D8]">
               <button
                 type="button"
                 onClick={() => setDeleteTarget(null)}
                 disabled={isDeleting}
-                className="px-4 py-2 rounded-xl bg-[#161616] border border-white/10 text-white/80 hover:text-white text-xs font-medium transition-colors"
+                className="px-4 py-2 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] hover:bg-[#F2EFE9] text-xs font-medium transition-colors"
               >
                 Batal
               </button>
@@ -307,7 +307,7 @@ export function AdminProjectList({ initialProjects }: AdminProjectListProps) {
                 type="button"
                 onClick={confirmDelete}
                 disabled={isDeleting}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500 hover:bg-red-600 text-white text-xs font-semibold transition-colors disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-[#FFFFFF] text-xs font-semibold transition-colors disabled:opacity-50"
               >
                 {isDeleting ? (
                   <>

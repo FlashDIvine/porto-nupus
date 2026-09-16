@@ -213,22 +213,22 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
-        <div className="flex items-center gap-4">
+      {/* Top Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E6E2D8]">
+        <div className="flex items-center gap-3">
           <Link
             href="/admin"
-            className="p-2 rounded-xl bg-[#161616] border border-white/10 text-white/70 hover:text-white hover:border-white/20 transition-colors"
+            className="p-2 rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] text-[#6B6661] hover:text-[#181716] hover:border-[#181716]/30 transition-colors shadow-2xs"
             title="Kembali ke Dashboard"
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-[#D4FF00]">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#E26D5C]">
               Pengaturan Profil
             </span>
-            <h1 className="font-heading text-2xl sm:text-3xl font-semibold text-white tracking-tight mt-0.5">
-              Edit Profil & Informasi Diri
+            <h1 className="font-heading text-2xl sm:text-3xl font-semibold text-[#181716] tracking-tight mt-0.5 leading-[1.1]">
+              Edit Profil &amp; Informasi Diri
             </h1>
           </div>
         </div>
@@ -237,7 +237,7 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
           type="button"
           onClick={handleSubmit}
           disabled={isSubmitting || isUploadingPhoto}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#D4FF00] hover:bg-[#bce300] text-[#0a0a0a] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-md shadow-[#D4FF00]/10"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#181716] hover:bg-[#2B50EC] text-[#FAF8F5] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-xs"
         >
           {isSubmitting ? (
             <>
@@ -252,31 +252,31 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
 
       {/* Feedback Alerts */}
       {errorMessage && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm animate-in fade-in duration-200">
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-sm animate-in fade-in duration-200">
           <AlertTriangle className="w-5 h-5 shrink-0" />
           <p>{errorMessage}</p>
         </div>
       )}
 
       {successMessage && (
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-[#D4FF00]/10 border border-[#D4FF00]/30 text-[#D4FF00] text-sm animate-in fade-in duration-200">
-          <CheckCircle2 className="w-5 h-5 shrink-0" />
+        <div className="flex items-center gap-3 p-4 rounded-xl bg-[#D8E2DC]/60 border border-[#E6E2D8] text-[#181716] text-sm animate-in fade-in duration-200">
+          <CheckCircle2 className="w-5 h-5 shrink-0 text-[#181716]" />
           <p>{successMessage}</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Section 1: Foto Profil & Nama */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#121212] border border-white/10 space-y-6">
-          <div className="flex items-center gap-2 border-b border-white/10 pb-4">
-            <User className="w-5 h-5 text-[#D4FF00]" />
-            <h2 className="text-base font-medium text-white">Identitas & Foto Portofolio</h2>
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] space-y-6 shadow-xs">
+          <div className="flex items-center gap-2 border-b border-[#E6E2D8] pb-4">
+            <User className="w-5 h-5 text-[#E26D5C]" />
+            <h2 className="text-base font-medium text-[#181716]">Identitas &amp; Foto Portofolio</h2>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
             {/* Photo Avatar Preview */}
             <div className="relative group">
-              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-white/10 bg-[#161616]">
+              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-[#E6E2D8] bg-[#F2EFE9]">
                 {photoUrl ? (
                   <Image
                     src={photoUrl}
@@ -286,14 +286,14 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                     sizes="128px"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-white/30">
+                  <div className="w-full h-full flex items-center justify-center text-[#6B6661]">
                     <User className="w-12 h-12" />
                   </div>
                 )}
 
                 {isUploadingPhoto && (
-                  <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
-                    <Loader2 className="w-6 h-6 animate-spin text-[#D4FF00]" />
+                  <div className="absolute inset-0 bg-[#181716]/70 flex items-center justify-center">
+                    <Loader2 className="w-6 h-6 animate-spin text-[#FAF8F5]" />
                   </div>
                 )}
               </div>
@@ -310,15 +310,15 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
             {/* Photo & Name Controls */}
             <div className="flex-1 space-y-4 w-full">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-white/70 mb-2">
-                  Nama Desainer / Studio <span className="text-[#D4FF00]">*</span>
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#181716] mb-2">
+                  Nama Desainer / Studio <span className="text-[#E26D5C]">*</span>
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Contoh: Muhammad Najib"
-                  className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-white/10 text-white placeholder:text-white/30 focus:border-[#D4FF00] focus:ring-1 focus:ring-[#D4FF00] focus:outline-none transition-all text-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] placeholder:text-[#6B6661]/50 focus:border-[#2B50EC] focus:ring-1 focus:ring-[#2B50EC] focus:outline-none transition-all text-sm"
                 />
               </div>
 
@@ -327,9 +327,9 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                   type="button"
                   onClick={() => photoInputRef.current?.click()}
                   disabled={isUploadingPhoto}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#161616] border border-white/10 hover:border-[#D4FF00] text-white text-xs font-mono uppercase tracking-wider transition-colors disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#2B50EC] text-[#181716] text-xs font-mono uppercase tracking-wider transition-colors disabled:opacity-50"
                 >
-                  <Upload className="w-3.5 h-3.5 text-[#D4FF00]" />
+                  <Upload className="w-3.5 h-3.5 text-[#E26D5C]" />
                   <span>{photoUrl ? 'Ganti Foto' : 'Unggah Foto'}</span>
                 </button>
 
@@ -337,14 +337,14 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                   <button
                     type="button"
                     onClick={() => setPhotoUrl(null)}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#161616] text-red-400 hover:bg-red-500/10 border border-white/5 text-xs font-mono transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#FAF8F5] text-red-600 hover:bg-red-50 border border-red-200 text-xs font-mono transition-colors"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                     <span>Hapus Foto</span>
                   </button>
                 )}
               </div>
-              <p className="text-[11px] text-white/40 font-mono">
+              <p className="text-[11px] text-[#6B6661] font-mono">
                 Foto akan otomatis dikompresi ke WebP maks 2560px. Format: JPG, PNG, WebP.
               </p>
             </div>
@@ -352,22 +352,22 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
         </div>
 
         {/* Section 2: Bilingual Tagline & Bio */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#121212] border border-white/10 space-y-6">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] space-y-6 shadow-xs">
+          <div className="flex items-center justify-between border-b border-[#E6E2D8] pb-4">
             <div className="flex items-center gap-2">
-              <FileText className="w-5 h-5 text-[#D4FF00]" />
-              <h2 className="text-base font-medium text-white">Tagline & Biografi Diri</h2>
+              <FileText className="w-5 h-5 text-[#E26D5C]" />
+              <h2 className="text-base font-medium text-[#181716]">Tagline &amp; Biografi Diri</h2>
             </div>
 
             {/* Language Switcher Tabs */}
-            <div className="flex items-center rounded-lg bg-[#161616] p-1 border border-white/10">
+            <div className="flex items-center rounded-lg bg-[#FAF8F5] p-1 border border-[#E6E2D8]">
               <button
                 type="button"
                 onClick={() => setActiveLangTab('id')}
                 className={`px-3 py-1 rounded-md text-xs font-mono transition-all ${
                   activeLangTab === 'id'
-                    ? 'bg-[#D4FF00] text-[#0a0a0a] font-semibold'
-                    : 'text-white/60 hover:text-white'
+                    ? 'bg-[#181716] text-[#FAF8F5] font-semibold'
+                    : 'text-[#6B6661] hover:text-[#181716]'
                 }`}
               >
                 🇮🇩 Indonesia
@@ -377,8 +377,8 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                 onClick={() => setActiveLangTab('en')}
                 className={`px-3 py-1 rounded-md text-xs font-mono transition-all ${
                   activeLangTab === 'en'
-                    ? 'bg-[#D4FF00] text-[#0a0a0a] font-semibold'
-                    : 'text-white/60 hover:text-white'
+                    ? 'bg-[#181716] text-[#FAF8F5] font-semibold'
+                    : 'text-[#6B6661] hover:text-[#181716]'
                 }`}
               >
                 🇬🇧 English
@@ -389,7 +389,7 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
           {/* Tagline */}
           {activeLangTab === 'id' ? (
             <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
                 Tagline Utama (Indonesia)
               </label>
               <input
@@ -397,12 +397,12 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                 value={taglineId}
                 onChange={(e) => setTaglineId(e.target.value)}
                 placeholder="Desainer Komunikasi Visual & Pengarah Seni Visual"
-                className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-white/10 text-white placeholder:text-white/30 focus:border-[#D4FF00] focus:outline-none text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] placeholder:text-[#6B6661]/50 focus:border-[#2B50EC] focus:outline-none text-sm"
               />
             </div>
           ) : (
             <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
                 Main Tagline (English)
               </label>
               <input
@@ -410,7 +410,7 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                 value={taglineEn}
                 onChange={(e) => setTaglineEn(e.target.value)}
                 placeholder="Visual Communication Designer & Art Director"
-                className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-white/10 text-white placeholder:text-white/30 focus:border-[#D4FF00] focus:outline-none text-sm"
+                className="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] placeholder:text-[#6B6661]/50 focus:border-[#2B50EC] focus:outline-none text-sm"
               />
             </div>
           )}
@@ -418,7 +418,7 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
           {/* Bio */}
           {activeLangTab === 'id' ? (
             <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
                 Biografi / Tentang Saya (Indonesia)
               </label>
               <textarea
@@ -426,12 +426,12 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                 value={bioId}
                 onChange={(e) => setBioId(e.target.value)}
                 placeholder="Tuliskan latar belakang keahlian, filosofi desain, dan bidang spesialisasi Anda..."
-                className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-white/10 text-white placeholder:text-white/30 focus:border-[#D4FF00] focus:outline-none text-sm leading-relaxed"
+                className="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] placeholder:text-[#6B6661]/50 focus:border-[#2B50EC] focus:outline-none text-sm leading-relaxed"
               />
             </div>
           ) : (
             <div className="space-y-2">
-              <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
                 Biography / About Me (English)
               </label>
               <textarea
@@ -439,36 +439,36 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                 value={bioEn}
                 onChange={(e) => setBioEn(e.target.value)}
                 placeholder="Write your design philosophy, creative journey, and specialization..."
-                className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-white/10 text-white placeholder:text-white/30 focus:border-[#D4FF00] focus:outline-none text-sm leading-relaxed"
+                className="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] placeholder:text-[#6B6661]/50 focus:border-[#2B50EC] focus:outline-none text-sm leading-relaxed"
               />
             </div>
           )}
         </div>
 
         {/* Section 3: Keahlian & Tautan CV */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#121212] border border-white/10 space-y-6">
-          <div className="flex items-center gap-2 border-b border-white/10 pb-4">
-            <Sparkles className="w-5 h-5 text-[#D4FF00]" />
-            <h2 className="text-base font-medium text-white">Keahlian (Skills) & Tautan CV</h2>
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] space-y-6 shadow-xs">
+          <div className="flex items-center gap-2 border-b border-[#E6E2D8] pb-4">
+            <Sparkles className="w-5 h-5 text-[#E26D5C]" />
+            <h2 className="text-base font-medium text-[#181716]">Keahlian (Skills) &amp; Tautan CV</h2>
           </div>
 
           {/* Skills Tag Input */}
           <div className="space-y-3">
-            <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
+            <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
               Daftar Keahlian Desain (Tekan Enter atau Koma)
             </label>
 
-            <div className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-[#161616] border border-white/10 focus-within:border-[#D4FF00]">
+            <div className="flex flex-wrap items-center gap-2 p-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] focus-within:border-[#2B50EC]">
               {skills.map((skill) => (
                 <span
                   key={skill}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#222] text-[#D4FF00] text-xs font-mono border border-white/5"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#D8E2DC] text-[#181716] text-xs font-mono border border-[#E6E2D8]"
                 >
                   <span>{skill}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveSkill(skill)}
-                    className="text-white/40 hover:text-white transition-colors"
+                    className="text-[#6B6661] hover:text-[#181716] transition-colors"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -482,14 +482,14 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                 onKeyDown={handleSkillKeyDown}
                 onBlur={handleAddSkill}
                 placeholder={skills.length === 0 ? 'Ketik keahlian (misal: Brand Identity, Editorial, Typography)...' : ''}
-                className="flex-1 min-w-[150px] bg-transparent text-sm text-white placeholder:text-white/30 focus:outline-none px-1 py-0.5"
+                className="flex-1 min-w-[150px] bg-transparent text-sm text-[#181716] placeholder:text-[#6B6661]/50 focus:outline-none px-1 py-0.5"
               />
             </div>
           </div>
 
           {/* CV URL Input */}
           <div className="space-y-2">
-            <label className="block text-xs font-mono uppercase tracking-wider text-white/70">
+            <label className="block text-xs font-mono uppercase tracking-wider text-[#181716]">
               Tautan CV (Curriculum Vitae / Resume PDF)
             </label>
             <input
@@ -497,19 +497,19 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
               value={cvUrl}
               onChange={(e) => setCvUrl(e.target.value)}
               placeholder="https://example.com/cv.pdf atau Google Drive link"
-              className="w-full px-4 py-3 rounded-xl bg-[#161616] border border-white/10 text-white placeholder:text-white/30 focus:border-[#D4FF00] focus:outline-none text-sm font-mono"
+              className="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] text-[#181716] placeholder:text-[#6B6661]/50 focus:border-[#2B50EC] focus:outline-none text-sm font-mono"
             />
           </div>
         </div>
 
         {/* Section 4: Contact & Social Links */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#121212] border border-white/10 space-y-6">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] space-y-6 shadow-xs">
+          <div className="flex items-center justify-between border-b border-[#E6E2D8] pb-4">
             <div className="flex items-center gap-2">
-              <LinkIcon className="w-5 h-5 text-[#D4FF00]" />
+              <LinkIcon className="w-5 h-5 text-[#E26D5C]" />
               <div>
-                <h2 className="text-base font-medium text-white">Tautan Kontak & Sosial Media</h2>
-                <p className="text-xs text-white/50">
+                <h2 className="text-base font-medium text-[#181716]">Tautan Kontak &amp; Sosial Media</h2>
+                <p className="text-xs text-[#6B6661]">
                   Ditampilkan pada footer dan halaman kontak/about portofolio.
                 </p>
               </div>
@@ -518,20 +518,20 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
             <button
               type="button"
               onClick={handleAddContactLink}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#161616] border border-white/10 hover:border-[#D4FF00] text-[#D4FF00] text-xs font-mono uppercase tracking-wider transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8] hover:border-[#2B50EC] text-[#181716] text-xs font-mono uppercase tracking-wider transition-colors"
             >
-              <Plus className="w-3.5 h-3.5" />
+              <Plus className="w-3.5 h-3.5 text-[#E26D5C]" />
               <span>Tambah Tautan</span>
             </button>
           </div>
 
           {contactLinks.length === 0 ? (
-            <div className="text-center py-8 rounded-xl border border-dashed border-white/10 p-4 space-y-3">
-              <p className="text-xs text-white/40 font-mono">Belum ada tautan kontak yang ditambahkan.</p>
+            <div className="text-center py-8 rounded-xl border border-dashed border-[#E6E2D8] p-4 space-y-3 bg-[#FAF8F5]">
+              <p className="text-xs text-[#6B6661] font-mono">Belum ada tautan kontak yang ditambahkan.</p>
               <button
                 type="button"
                 onClick={handleAddContactLink}
-                className="text-xs text-[#D4FF00] hover:underline font-mono"
+                className="text-xs text-[#2B50EC] hover:underline font-mono"
               >
                 + Tambah Tautan Pertama
               </button>
@@ -541,14 +541,14 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
               {contactLinks.map((link, index) => (
                 <div
                   key={index}
-                  className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-3 rounded-xl bg-[#161616] border border-white/5"
+                  className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E6E2D8]"
                 >
                   {/* Platform Select */}
                   <div className="w-full sm:w-44">
                     <select
                       value={link.platform}
                       onChange={(e) => handleUpdateContactLink(index, 'platform', e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg bg-[#121212] border border-white/10 text-white text-xs focus:border-[#D4FF00] focus:outline-none"
+                      className="w-full px-3 py-2 rounded-lg bg-[#FFFFFF] border border-[#E6E2D8] text-[#181716] text-xs focus:border-[#2B50EC] focus:outline-none"
                     >
                       {COMMON_PLATFORMS.map((p) => (
                         <option key={p} value={p}>
@@ -565,7 +565,7 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                       value={link.url}
                       onChange={(e) => handleUpdateContactLink(index, 'url', e.target.value)}
                       placeholder="URL (e.g. https://instagram.com/najib atau mailto:...)"
-                      className="w-full px-3 py-2 rounded-lg bg-[#121212] border border-white/10 text-white placeholder:text-white/30 text-xs font-mono focus:border-[#D4FF00] focus:outline-none"
+                      className="w-full px-3 py-2 rounded-lg bg-[#FFFFFF] border border-[#E6E2D8] text-[#181716] placeholder:text-[#6B6661]/50 text-xs font-mono focus:border-[#2B50EC] focus:outline-none"
                     />
                   </div>
 
@@ -576,7 +576,7 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                       value={link.label || ''}
                       onChange={(e) => handleUpdateContactLink(index, 'label', e.target.value)}
                       placeholder="Label (e.g. @najib)"
-                      className="w-full px-3 py-2 rounded-lg bg-[#121212] border border-white/10 text-white placeholder:text-white/30 text-xs focus:border-[#D4FF00] focus:outline-none"
+                      className="w-full px-3 py-2 rounded-lg bg-[#FFFFFF] border border-[#E6E2D8] text-[#181716] placeholder:text-[#6B6661]/50 text-xs focus:border-[#2B50EC] focus:outline-none"
                     />
                   </div>
 
@@ -584,7 +584,7 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
                   <button
                     type="button"
                     onClick={() => handleRemoveContactLink(index)}
-                    className="p-2 rounded-lg bg-[#121212] text-red-400 hover:bg-red-500/10 transition-colors self-end sm:self-center"
+                    className="p-2 rounded-lg bg-[#FFFFFF] border border-[#E6E2D8] text-red-600 hover:bg-red-50 transition-colors self-end sm:self-center"
                     title="Hapus tautan ini"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -596,10 +596,10 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
         </div>
 
         {/* Submit Bottom Bar */}
-        <div className="flex items-center justify-between pt-6 border-t border-white/10">
+        <div className="flex items-center justify-between pt-6 border-t border-[#E6E2D8]">
           <Link
             href="/admin"
-            className="text-xs font-mono text-white/50 hover:text-white transition-colors"
+            className="text-xs font-mono text-[#6B6661] hover:text-[#181716] transition-colors"
           >
             ← Kembali ke Dashboard
           </Link>
@@ -607,7 +607,7 @@ export function ProfileForm({ initialProfile }: ProfileFormProps) {
           <button
             type="submit"
             disabled={isSubmitting || isUploadingPhoto}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#D4FF00] hover:bg-[#bce300] text-[#0a0a0a] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-md shadow-[#D4FF00]/10"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#181716] hover:bg-[#2B50EC] text-[#FAF8F5] font-semibold text-xs uppercase font-mono tracking-wider transition-all disabled:opacity-50 shadow-xs"
           >
             {isSubmitting ? (
               <>

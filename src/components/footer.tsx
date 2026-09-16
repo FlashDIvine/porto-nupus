@@ -99,14 +99,14 @@ export async function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="w-full bg-[#0a0a0a] border-t border-white/10 mt-auto transition-colors">
+    <footer className="w-full bg-[#FAF8F5] border-t border-[#E6E2D8] mt-auto transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Brand & Tagline */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left gap-1">
-          <Link href="/" className="font-heading text-lg font-semibold tracking-tight text-white hover:text-white/90 transition-colors">
-            {profileName}<span className="text-[#D4FF00]">.</span>
+          <Link href="/" className="font-heading text-xl font-semibold tracking-tight text-[#181716] hover:text-[#2B50EC] transition-colors">
+            {profileName}<span className="text-[#E26D5C]">.</span>
           </Link>
-          <p className="text-xs text-white/50 max-w-sm">
+          <p className="text-xs text-[#6B6661] max-w-sm font-body">
             Desain Komunikasi Visual • Brand Identity, Visual Exploration & Digital Artworks
           </p>
         </div>
@@ -120,7 +120,7 @@ export async function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={link.label || link.platform}
-              className="p-2.5 rounded-full bg-[#161616] border border-white/10 text-white/70 hover:text-[#0a0a0a] hover:bg-[#D4FF00] hover:border-[#D4FF00] transition-all transform hover:-translate-y-0.5 duration-200"
+              className="p-2.5 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-[#181716] hover:text-[#FAF8F5] hover:bg-[#2B50EC] hover:border-[#2B50EC] transition-all transform hover:-translate-y-0.5 duration-200 shadow-xs"
               title={link.label || link.platform}
             >
               {renderSocialIcon(link.platform)}
@@ -129,7 +129,7 @@ export async function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="text-xs text-white/40 text-center md:text-right font-mono">
+        <div className="text-xs text-[#6B6661] text-center md:text-right font-mono">
           © {currentYear} {profileName}. All rights reserved.
         </div>
       </div>

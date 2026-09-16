@@ -1,21 +1,29 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/language-context";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
-const fraunces = Fraunces({
-  variable: "--font-heading",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-body",
+const spaceMono = Space_Mono({
+  variable: "--font-space",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -91,10 +99,10 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${fraunces.variable} ${inter.variable} dark h-full antialiased`}
-      style={{ colorScheme: "dark" }}
+      className={`${cormorant.variable} ${plusJakarta.variable} ${spaceMono.variable} h-full antialiased`}
+      style={{ colorScheme: "light" }}
     >
-      <body className="min-h-full flex flex-col bg-[#0a0a0a] text-white selection:bg-[#D4FF00] selection:text-[#0a0a0a]">
+      <body className="min-h-full flex flex-col bg-[#FAF8F5] text-[#181716] selection:bg-[#E26D5C] selection:text-[#FAF8F5]">
         <LanguageProvider>
           <Navbar />
           <main className="flex-1 w-full">{children}</main>
