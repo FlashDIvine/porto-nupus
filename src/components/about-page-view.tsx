@@ -143,7 +143,7 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
         transition={{ duration: 0.6 }}
         className="flex flex-col md:flex-row items-center md:items-start gap-8 sm:gap-12"
       >
-        {/* Profile Picture with Layered Artistic Composition & Rotating Stamp */}
+        {/* Profile Picture with Layered Artistic Composition */}
         <div className="relative shrink-0 group">
           {/* Layered background accent card (offset & organic feel) */}
           <div className="absolute inset-0 rounded-2xl bg-[#D8E2DC]/50 -rotate-3 translate-x-2 translate-y-2 transition-transform duration-300 group-hover:rotate-0 group-hover:translate-x-1 group-hover:translate-y-1 pointer-events-none" />
@@ -165,37 +165,6 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
               </div>
             )}
             <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/60 pointer-events-none" />
-          </div>
-
-          {/* Creative rotating circular stamp / badge floating near the avatar corner */}
-          <div className="absolute -bottom-5 -right-5 sm:-bottom-6 sm:-right-6 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/85 backdrop-blur-md border border-white/80 shadow-md flex items-center justify-center p-1 z-20 select-none">
-            <svg
-              viewBox="0 0 100 100"
-              className="w-full h-full animate-[spin_12s_linear_infinite]"
-              aria-label="• VISUAL COMMUNICATION • DKV ARCHIVE 2026 •"
-            >
-              <defs>
-                <path
-                  id="avatarCirclePath"
-                  d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
-                />
-              </defs>
-              <text
-                className="text-[7px] font-mono uppercase fill-[#181716] font-semibold"
-                xmlSpace="preserve"
-              >
-                <textPath
-                  href="#avatarCirclePath"
-                  textLength="224"
-                  lengthAdjust="spacing"
-                >
-                  • VISUAL COMMUNICATION • DKV ARCHIVE 2026 •
-                </textPath>
-              </text>
-            </svg>
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <span className="text-[#E26D5C] text-sm font-semibold">✦</span>
-            </div>
           </div>
         </div>
 
