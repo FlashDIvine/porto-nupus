@@ -4,7 +4,11 @@ import "./globals.css";
 import { LanguageProvider } from "@/context/language-context";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { SeagullsBackground, SeagullsForeground } from "@/components/seagull-animation";
+import {
+  PuffyCloudsLayer,
+  SeagullsBackgroundLayer,
+  SeagullsForegroundLayer,
+} from "@/components/sky-ambience";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -105,12 +109,14 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-gradient-to-b from-[#D0F2F9] via-[#E9F8FF] to-[#F0FDFA] bg-fixed text-[#181716] selection:bg-[#E26D5C] selection:text-[#FAF8F5] relative overflow-x-hidden">
         <LanguageProvider>
-          {/* Lapisan Latar Belakang (z-index rendah / di balik kartu konten): 2 burung melintas lambat */}
-          <SeagullsBackground />
+          {/* Lapisan Awan-Awan Pastel Mengapung (Paling belakang: z-0) */}
+          <PuffyCloudsLayer />
+          {/* Lapisan Latar Belakang Burung (Di depan awan, di balik kartu konten: z-[2]) */}
+          <SeagullsBackgroundLayer />
           <Navbar />
           <main className="relative z-10 flex-1 w-full">{children}</main>
-          {/* Lapisan Latar Depan (foreground / di depan layar): 1 burung aksen */}
-          <SeagullsForeground />
+          {/* Lapisan Latar Depan Burung (Di depan kartu konten: z-40) */}
+          <SeagullsForegroundLayer />
           <Footer />
         </LanguageProvider>
       </body>

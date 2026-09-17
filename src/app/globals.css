@@ -160,24 +160,62 @@
 }
 
 /* ==========================================================================
-   SEAGULL FLIGHT & WING FLAPPING ANIMATIONS (ART-STYLE)
+   SKY AMBIENCE ANIMATIONS: PUFFY CLOUDS & ART-STYLE SEAGULLS
    ========================================================================== */
 
+/* Puffy Pastel Cloud Drift Animations (Parallax Horizontals 58s-88s) */
+@keyframes cloudDrift1 {
+  0% {
+    transform: translateX(-420px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+@keyframes cloudDrift2 {
+  0% {
+    transform: translateX(-380px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+@keyframes cloudDrift3 {
+  0% {
+    transform: translateX(-350px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+@keyframes cloudDrift4 {
+  0% {
+    transform: translateX(-300px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+/* Wing Flapping (M-Shape Dihedral Upstroke & Downstroke) */
 @keyframes seagullFlapNear {
   0%, 100% {
     transform: rotate(-18deg) scaleY(1);
   }
   50% {
-    transform: rotate(24deg) scaleY(0.72) translateY(2px);
+    transform: rotate(24deg) scaleY(0.72) translateY(3px);
   }
 }
 
 @keyframes seagullFlapFar {
   0%, 100% {
-    transform: rotate(-12deg) scaleY(1);
+    transform: rotate(-14deg) scaleY(1);
   }
   50% {
-    transform: rotate(20deg) scaleY(0.72) translateY(2px);
+    transform: rotate(20deg) scaleY(0.76) translateY(2px);
   }
 }
 
@@ -190,41 +228,129 @@
   }
 }
 
-/* Background Birds Flight (Left to Right, Slow, Scale 0.35) */
+/* Background Birds Flight (Left to Right, Continuous Staggered Loops) */
 @keyframes seagullFlyBg1 {
   0% {
-    transform: translateX(-140px) translateY(0) scale(0.35);
+    transform: translateX(-150px) translateY(0);
   }
-  30% {
-    transform: translateX(32vw) translateY(-18px) scale(0.35);
+  35% {
+    transform: translateX(38vw) translateY(-14px);
   }
-  65% {
-    transform: translateX(68vw) translateY(14px) scale(0.35);
+  70% {
+    transform: translateX(72vw) translateY(10px);
   }
   100% {
-    transform: translateX(calc(100vw + 160px)) translateY(-6px) scale(0.35);
+    transform: translateX(calc(100vw + 160px)) translateY(-4px);
   }
 }
 
 @keyframes seagullFlyBg2 {
   0% {
-    transform: translateX(-140px) translateY(0) scale(0.35);
+    transform: translateX(-150px) translateY(0);
   }
-  35% {
-    transform: translateX(36vw) translateY(16px) scale(0.35);
+  40% {
+    transform: translateX(42vw) translateY(12px);
   }
-  70% {
-    transform: translateX(72vw) translateY(-18px) scale(0.35);
+  75% {
+    transform: translateX(76vw) translateY(-10px);
   }
   100% {
-    transform: translateX(calc(100vw + 160px)) translateY(8px) scale(0.35);
+    transform: translateX(calc(100vw + 160px)) translateY(6px);
   }
 }
 
-/* Foreground Accent Bird Flight (Left to Right, Scale 0.65, Interval ~30s) */
+@keyframes seagullFlyBg3 {
+  0% {
+    transform: translateX(-190px) translateY(0);
+  }
+  40% {
+    transform: translateX(calc(42vw - 40px)) translateY(14px);
+  }
+  75% {
+    transform: translateX(calc(76vw - 40px)) translateY(-8px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 140px)) translateY(8px);
+  }
+}
+
+@keyframes seagullFlyBg4 {
+  0% {
+    transform: translateX(-150px) translateY(0);
+  }
+  30% {
+    transform: translateX(32vw) translateY(16px);
+  }
+  65% {
+    transform: translateX(68vw) translateY(-18px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 160px)) translateY(8px);
+  }
+}
+
+@keyframes seagullFlyBg5 {
+  0% {
+    transform: translateX(-150px) translateY(0);
+  }
+  45% {
+    transform: translateX(48vw) translateY(-12px);
+  }
+  80% {
+    transform: translateX(82vw) translateY(8px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 160px)) translateY(-6px);
+  }
+}
+
+/* Foreground Accent Birds Flight (Left to Right, Alternating Staggered Loops) */
+@keyframes seagullFlyFg1 {
+  0% {
+    transform: translateX(-160px) translateY(0);
+    opacity: 0;
+  }
+  2% {
+    opacity: 0.95;
+  }
+  44% {
+    opacity: 0.95;
+  }
+  48% {
+    transform: translateX(calc(100vw + 180px)) translateY(-18px);
+    opacity: 0;
+  }
+  48.01%, 100% {
+    transform: translateX(-200px) translateY(0);
+    opacity: 0;
+  }
+}
+
+@keyframes seagullFlyFg2 {
+  0% {
+    transform: translateX(-160px) translateY(0);
+    opacity: 0;
+  }
+  2% {
+    opacity: 0.92;
+  }
+  45% {
+    opacity: 0.92;
+  }
+  50% {
+    transform: translateX(calc(100vw + 180px)) translateY(15px);
+    opacity: 0;
+  }
+  50.01%, 100% {
+    transform: translateX(-200px) translateY(0);
+    opacity: 0;
+  }
+}
+
+/* Backward compatibility alias for single fg bird */
 @keyframes seagullFlyFg {
   0% {
-    transform: translateX(-160px) translateY(0) scale(0.65);
+    transform: translateX(-160px) translateY(0);
     opacity: 0;
   }
   2% {
@@ -234,11 +360,11 @@
     opacity: 0.92;
   }
   46% {
-    transform: translateX(calc(100vw + 180px)) translateY(-22px) scale(0.65);
+    transform: translateX(calc(100vw + 180px)) translateY(-22px);
     opacity: 0;
   }
   46.01%, 100% {
-    transform: translateX(-200px) translateY(0) scale(0.65);
+    transform: translateX(-200px) translateY(0);
     opacity: 0;
   }
 }
