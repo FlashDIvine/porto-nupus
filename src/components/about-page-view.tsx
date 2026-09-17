@@ -149,7 +149,7 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
           <div className="absolute inset-0 rounded-2xl bg-[#D8E2DC]/50 -rotate-3 translate-x-2 translate-y-2 transition-transform duration-300 group-hover:rotate-0 group-hover:translate-x-1 group-hover:translate-y-1 pointer-events-none" />
 
           {/* Profile photo container */}
-          <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-[#E6E2D8] shadow-[0_12px_30px_-8px_rgba(226,109,92,0.25)] bg-[#FFFFFF]">
+          <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border-2 border-white/80 shadow-[0_12px_30px_-8px_rgba(226,109,92,0.25)] bg-white/80 backdrop-blur-[8px]">
             {profile.photo_url ? (
               <Image
                 src={profile.photo_url}
@@ -164,11 +164,11 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
                 No Photo
               </div>
             )}
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-[#E6E2D8]/40 pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/60 pointer-events-none" />
           </div>
 
           {/* Creative rotating circular stamp / badge floating near the avatar corner */}
-          <div className="absolute -bottom-5 -right-5 sm:-bottom-6 sm:-right-6 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-[#FAF8F5]/95 backdrop-blur-xs border border-[#E6E2D8] shadow-md flex items-center justify-center p-1 z-20 select-none">
+          <div className="absolute -bottom-5 -right-5 sm:-bottom-6 sm:-right-6 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/85 backdrop-blur-md border border-white/80 shadow-md flex items-center justify-center p-1 z-20 select-none">
             <svg
               viewBox="0 0 100 100"
               className="w-full h-full animate-[spin_12s_linear_infinite]"
@@ -209,7 +209,7 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
 
             {/* Live status indicator with tooltip */}
             <div
-              className="group/status relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-mono text-[#181716] shadow-2xs cursor-default"
+              className="group/status relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-[8px] border border-white/80 text-xs font-mono text-[#181716] shadow-2xs cursor-default"
               role="status"
               aria-label="Open for freelance & collaborations"
             >
@@ -315,7 +315,7 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
                 key={`${skill}-${idx}`}
                 tabIndex={0}
                 role="button"
-                className="group bg-[#FFFFFF] text-[#181716] border border-[#E6E2D8] px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1.5 shadow-sm hover:bg-[#E26D5C] hover:text-white hover:border-[#E26D5C] hover:-translate-y-1 hover:shadow-md cursor-pointer select-none active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E26D5C]"
+                className="group bg-white/80 backdrop-blur-[8px] text-[#181716] border border-white/80 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1.5 shadow-sm hover:bg-[#E26D5C] hover:text-white hover:border-[#E26D5C] hover:-translate-y-1 hover:shadow-md cursor-pointer select-none active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E26D5C]"
               >
                 <span className="text-[#E26D5C] group-hover:text-white group-hover:rotate-45 transition-all duration-300 text-xs inline-block shrink-0">
                   ✦
@@ -355,7 +355,7 @@ export function AboutPageView({ profile }: AboutPageViewProps) {
                   href={contact.url}
                   target={isDirectAction ? undefined : '_blank'}
                   rel={isDirectAction ? undefined : 'noopener noreferrer'}
-                  className={`group bg-[#FFFFFF] border border-[#E6E2D8] rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 flex items-center justify-between gap-4 ${styles.cardHover}`}
+                  className={`group bg-white/80 backdrop-blur-[8px] border border-white/80 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 flex items-center justify-between gap-4 shadow-[0_8px_24px_rgba(24,23,22,0.03)] hover:shadow-[0_16px_32px_rgba(24,23,22,0.08)] ${styles.cardHover}`}
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
                     <div

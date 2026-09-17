@@ -131,7 +131,7 @@ export function ProjectBentoGrid({ projects }: ProjectBentoGridProps) {
 
   if (!projects || projects.length === 0) {
     return (
-      <div className="w-full py-20 text-center rounded-xl border border-dashed border-[#E6E2D8] bg-[#FFFFFF] p-8 shadow-xs">
+      <div className="w-full py-20 text-center rounded-2xl border border-dashed border-white/80 bg-white/75 backdrop-blur-[8px] p-8 shadow-xs">
         <Sparkles className="w-8 h-8 text-[#E26D5C] mx-auto mb-3 opacity-80" />
         <h3 className="text-xl font-heading text-[#181716]">
           {isId ? 'Belum Ada Proyek Publik' : 'No Published Projects Yet'}
@@ -158,7 +158,7 @@ export function ProjectBentoGrid({ projects }: ProjectBentoGridProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, delay: (idx % 3) * 0.1 }}
-            className={`group flex flex-col justify-between overflow-hidden rounded-xl bg-[#FFFFFF] border border-[#E6E2D8] shadow-[0_4px_20px_rgba(24,23,22,0.03)] hover:shadow-[0_16px_36px_rgba(24,23,22,0.08)] hover:border-[#181716]/30 transition-all duration-500 ${cardConfig.colSpan}`}
+            className={`group flex flex-col justify-between overflow-hidden rounded-2xl bg-white/80 backdrop-blur-[8px] border border-white/80 shadow-[0_8px_30px_rgba(24,23,22,0.04)] hover:shadow-[0_20px_40px_rgba(24,23,22,0.08)] hover:border-[#181716]/30 transition-all duration-500 ${cardConfig.colSpan}`}
           >
             <Link
               href={`/project/${project.slug}`}
@@ -198,8 +198,8 @@ export function ProjectBentoGrid({ projects }: ProjectBentoGridProps) {
                 </div>
               </div>
 
-              {/* Card Body: #FFFFFF card body with subtle ambient drop-shadow */}
-              <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 bg-[#FFFFFF]">
+              {/* Card Body: Semi-transparent frosted glass body with blur(8px) */}
+              <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 bg-white/70 backdrop-blur-[8px]">
                 <div>
                   <h3 className="font-heading text-xl sm:text-2xl font-semibold text-[#181716] group-hover:text-[#2B50EC] transition-colors leading-[1.1] line-clamp-2">
                     {titleText}

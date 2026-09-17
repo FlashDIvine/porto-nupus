@@ -99,7 +99,7 @@ export async function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="w-full bg-[#FAF8F5] border-t border-[#E6E2D8] mt-auto transition-colors">
+    <footer className="w-full bg-white/40 backdrop-blur-md border-t border-white/60 mt-auto transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Brand & Tagline */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left gap-1">
@@ -120,7 +120,7 @@ export async function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={link.label || link.platform}
-              className="p-2.5 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-[#181716] hover:text-[#FAF8F5] hover:bg-[#2B50EC] hover:border-[#2B50EC] transition-all transform hover:-translate-y-0.5 duration-200 shadow-xs"
+              className="p-2.5 rounded-full bg-white/80 backdrop-blur-[8px] border border-white/80 text-[#181716] hover:text-[#FAF8F5] hover:bg-[#2B50EC] hover:border-[#2B50EC] transition-all transform hover:-translate-y-0.5 duration-200 shadow-xs"
               title={link.label || link.platform}
             >
               {renderSocialIcon(link.platform)}

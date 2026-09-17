@@ -4,6 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/context/language-context";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { SeagullsBackground, SeagullsForeground } from "@/components/seagull-animation";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -102,10 +103,14 @@ export default function RootLayout({
       className={`${cormorant.variable} ${plusJakarta.variable} ${spaceMono.variable} h-full antialiased`}
       style={{ colorScheme: "light" }}
     >
-      <body className="min-h-full flex flex-col bg-[#FAF8F5] text-[#181716] selection:bg-[#E26D5C] selection:text-[#FAF8F5]">
+      <body className="min-h-full flex flex-col bg-gradient-to-b from-[#D0F2F9] via-[#E9F8FF] to-[#F0FDFA] bg-fixed text-[#181716] selection:bg-[#E26D5C] selection:text-[#FAF8F5] relative overflow-x-hidden">
         <LanguageProvider>
+          {/* Lapisan Latar Belakang (z-index rendah / di balik kartu konten): 2 burung melintas lambat */}
+          <SeagullsBackground />
           <Navbar />
-          <main className="flex-1 w-full">{children}</main>
+          <main className="relative z-10 flex-1 w-full">{children}</main>
+          {/* Lapisan Latar Depan (foreground / di depan layar): 1 burung aksen */}
+          <SeagullsForeground />
           <Footer />
         </LanguageProvider>
       </body>

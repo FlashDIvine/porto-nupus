@@ -28,10 +28,10 @@ export function HomePageView({ projects, profile }: HomePageViewProps) {
           {/* Left Column: Metadata tag, active status indicator, expressive heading */}
           <div className="lg:col-span-7 flex flex-col items-start text-left space-y-6">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#6B6661] bg-[#F2EFE9] border border-[#E6E2D8] px-3 py-1 rounded-full">
+              <span className="font-mono text-xs uppercase tracking-widest text-[#6B6661] bg-white/60 backdrop-blur-[8px] border border-white/80 px-3 py-1 rounded-full">
                 01 / ARCHIVE 2026
               </span>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFFFFF] border border-[#E6E2D8] text-xs font-mono text-[#181716] shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-[8px] border border-white/80 text-xs font-mono text-[#181716] shadow-xs">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E26D5C] opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#E26D5C]" />

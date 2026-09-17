@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "preview": "next start",
+    "dev": "next dev -H 127.0.0.1 -p 3000",
+    "dev:webpack": "next dev --webpack -H 127.0.0.1 -p 3000",
+    "dev:turbo": "next dev --turbopack -H 127.0.0.1 -p 3000",
+    "dev:runner": "node scripts/dev-runner.mjs",
+    "build": "NODE_OPTIONS='--max-old-space-size=2048' next build",
+    "start": "NODE_OPTIONS='--max-old-space-size=2048' next start",
+    "preview": "NODE_OPTIONS='--max-old-space-size=2048' next start",
     "lint": "eslint"
   },
   "dependencies": {

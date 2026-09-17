@@ -27,7 +27,7 @@ export function HighlightGalleryView({ highlights }: HighlightGalleryViewProps) 
   if (!highlights || highlights.length === 0) {
     return (
       <div className="w-full max-w-md mx-auto py-24 text-center px-4">
-        <div className="w-14 h-14 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] flex items-center justify-center mx-auto mb-4 text-[#E26D5C] shadow-xs">
+        <div className="w-14 h-14 rounded-2xl bg-white/80 backdrop-blur-[8px] border border-white/80 flex items-center justify-center mx-auto mb-4 text-[#E26D5C] shadow-xs">
           <ImageIcon className="w-7 h-7 opacity-80" />
         </div>
         <h3 className="text-xl font-heading text-[#181716]">
@@ -84,7 +84,7 @@ export function HighlightGalleryView({ highlights }: HighlightGalleryViewProps) 
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: (idx % 3) * 0.1 }}
-              className="break-inside-avoid group relative rounded-xl overflow-hidden bg-[#FFFFFF] border border-[#E6E2D8] hover:border-[#181716]/30 transition-all duration-300 shadow-[0_4px_20px_rgba(24,23,22,0.03)] hover:shadow-[0_16px_36px_rgba(24,23,22,0.08)]"
+              className="break-inside-avoid group relative rounded-2xl overflow-hidden bg-white/80 backdrop-blur-[8px] border border-white/80 hover:border-[#181716]/30 transition-all duration-300 shadow-[0_8px_30px_rgba(24,23,22,0.04)] hover:shadow-[0_20px_40px_rgba(24,23,22,0.08)]"
             >
               <Link
                 href={`/project/${item.projectSlug}`}
@@ -117,8 +117,8 @@ export function HighlightGalleryView({ highlights }: HighlightGalleryViewProps) 
                   </div>
                 </div>
 
-                {/* Editorial Caption Bar */}
-                <div className="p-4 sm:p-5 bg-[#FFFFFF] border-t border-[#E6E2D8] space-y-1">
+                {/* Editorial Caption Bar: Frosted Glass */}
+                <div className="p-4 sm:p-5 bg-white/70 backdrop-blur-[8px] border-t border-[#E6E2D8]/80 space-y-1">
                   <h3 className="font-heading text-base sm:text-lg font-semibold text-[#181716] group-hover:text-[#2B50EC] transition-colors leading-snug">
                     {captionStr || projectTitleStr}
                   </h3>

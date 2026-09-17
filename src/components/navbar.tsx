@@ -77,18 +77,15 @@ export function Navbar() {
       <header className="sticky top-6 z-50 mx-auto max-w-fit px-4 transition-all duration-300">
         <div
           ref={navContainerRef}
-          className="relative flex items-center justify-between gap-5 sm:gap-7 px-4 sm:px-6 py-2.5 rounded-full backdrop-blur-md bg-[#FAF8F5]/85 border border-[#E6E2D8] shadow-sm"
+          className="relative flex items-center justify-between gap-5 sm:gap-7 px-4 sm:px-6 py-2.5 rounded-full backdrop-blur-md bg-white/80 border border-white/80 shadow-[0_4px_20px_rgba(24,23,22,0.04)]"
         >
-          {/* Logo: Editorial serif wordmark "Portofolio." with a small monospace badge "[DKV]" */}
+          {/* Logo: Editorial serif wordmark "Portofolio." */}
           <Link
             href="/"
-            className="group flex items-center gap-2 focus:outline-none shrink-0"
+            className="group flex items-center focus:outline-none shrink-0"
           >
             <span className="font-heading text-xl sm:text-2xl font-semibold tracking-tight text-[#181716] group-hover:text-[#2B50EC] transition-colors">
               Portofolio<span className="text-[#E26D5C]">.</span>
-            </span>
-            <span className="text-[10px] sm:text-xs font-mono text-[#6B6661] bg-[#F2EFE9] border border-[#E6E2D8] px-1.5 py-0.5 rounded tracking-wider">
-              [DKV]
             </span>
           </Link>
 
@@ -236,7 +233,7 @@ export function Navbar() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -8, scale: 0.98 }}
                 transition={{ duration: 0.2 }}
-                className="absolute top-full left-0 right-0 mt-3 p-3 rounded-2xl bg-[#FFFFFF] border border-[#E6E2D8] shadow-lg md:hidden overflow-hidden z-50 min-w-[240px]"
+                className="absolute top-full left-0 right-0 mt-3 p-3 rounded-2xl bg-white/90 backdrop-blur-md border border-white/80 shadow-xl md:hidden overflow-hidden z-50 min-w-[240px]"
               >
                 <nav className="flex flex-col space-y-1.5">
                   {navLinks.map((link) => {

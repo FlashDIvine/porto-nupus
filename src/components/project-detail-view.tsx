@@ -79,7 +79,7 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
 
         {/* Full-width Hero Cover Image */}
         {project.cover_image_url && (
-          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden border border-[#E6E2D8] bg-[#FFFFFF] mt-8 shadow-[0_16px_40px_rgba(24,23,22,0.06)]">
+          <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden border border-white/80 bg-white/80 backdrop-blur-[8px] mt-8 shadow-[0_16px_40px_rgba(24,23,22,0.06)]">
             <Image
               src={project.cover_image_url}
               alt={titleText}
@@ -122,7 +122,7 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
                 {project.tools_used.map((tool) => (
                   <span
                     key={tool}
-                    className="text-xs font-mono px-3 py-1 rounded-lg bg-[#FFFFFF] text-[#181716] border border-[#E6E2D8] shadow-2xs"
+                    className="text-xs font-mono px-3 py-1 rounded-lg bg-white/80 backdrop-blur-[8px] text-[#181716] border border-white/80 shadow-2xs"
                   >
                     {tool}
                   </span>
@@ -174,7 +174,7 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
               return (
                 <figure
                   key={`${img.url}-${index}`}
-                  className="rounded-2xl overflow-hidden border border-[#E6E2D8] bg-[#FFFFFF] shadow-[0_8px_30px_rgba(24,23,22,0.04)] group"
+                  className="rounded-2xl overflow-hidden border border-white/80 bg-white/80 backdrop-blur-[8px] shadow-[0_8px_30px_rgba(24,23,22,0.04)] group"
                 >
                   <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-[#F2EFE9]">
                     <Image
@@ -186,7 +186,7 @@ export function ProjectDetailView({ project, otherProjects = [] }: ProjectDetail
                     />
                   </div>
                   {captionStr && (
-                    <figcaption className="p-4 bg-[#F2EFE9] border-t border-[#E6E2D8] text-xs text-[#181716] font-mono flex items-center justify-between">
+                    <figcaption className="p-4 bg-white/70 backdrop-blur-[8px] border-t border-[#E6E2D8]/80 text-xs text-[#181716] font-mono flex items-center justify-between">
                       <span>{captionStr}</span>
                       <span className="text-[#6B6661]">0{index + 1}</span>
                     </figcaption>
