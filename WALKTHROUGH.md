@@ -1,114 +1,118 @@
-# Mobile Layout & Project Showcase Re-Engineering Walkthrough
+# Gallery Page Mobile Ergonomics & Interactive Masonry Lightbox Overhaul — Walkthrough
 
 ## Executive Summary
-The portfolio website at [porto-nupus.vercel.app](https://porto-nupus.vercel.app/) was re-engineered to eradicate acute mobile vertical scroll fatigue. Previously, full-bleed projects rendered sequentially down a single vertical column forced mobile users through deep DOM scroll distances (~3,500px+), burying critical call-to-action sections and inducing cognitive friction.
+The portfolio gallery at `/gallery` was re-engineered to resolve mobile viewport ergonomics, eradicate excessive vertical scrolling, and eliminate visual clipping of design works with diverse aspect ratios (tall editorial posters, wide branding identity spreads, horizontal UI screenshots, and publication spreads).
 
-We overhauled the project showcase architecture into an ultra-responsive, touch-first browsing experience featuring:
-- Strict viewport boundary isolation between mobile (<768px) and desktop (>=768px).
-- Instantaneous client-side taxonomy filtering with spring physics.
-- Embla Carousel touch-inertia snap slider with progressive counter (`01 / 05`) and height strictly constrained to `max-h-[440px]`.
-- Gesture-driven `vaul` drag-to-dismiss bottom sheet case study drawers.
-- Thumb-zone mobile floating dock (`fixed bottom-4 left-1/2 -translate-x-1/2 z-50`) with instant email copy feedback.
-- Collapsible "View Full Archive" directory modal.
-- Deep verification via automated headless Brave browser over Chrome DevTools Protocol (CDP).
+The previous presentation rendered full-width column blocks without category segregation or interactive drill-down capabilities. We transformed the browsing experience into a responsive, fluid masonry grid equipped with:
+- **Sticky Taxonomy Filter (`GalleryFilter`)** positioned with ergonomic clearance beneath the floating navigation bar (`sticky top-[76px] sm:top-[82px] z-30`) with spring physics, isolated horizontal container scrolling (no vertical window jumping), and zero-latency client-side reactive state filtering.
+- **Adaptive Responsive Masonry Grid (`GalleryMasonry`)** utilizing CSS multi-column architecture (`columns-2 md:columns-3 lg:columns-4 gap-3 md:gap-4 lg:gap-5 [column-fill:_balance]`) that preserves the intrinsic aspect ratio of every artwork without forced square cropping, paired with stable item keys and rapid exit transitions for smooth Framer Motion layout animations without skeleton flicker.
+- **Micro-Interactions & Tap Feedback (`GalleryItemCard`)** including touch scaling (`active:scale-[0.98]`), `group-active:opacity-100` touch feedback for the gradient title overlay, animated shimmer skeleton loaders, and `break-inside-avoid inline-block w-full` multi-column stability.
+- **Full-Screen Pinch-and-Swipe Lightbox (`GalleryLightbox`)** powered by `yet-another-react-lightbox` with `Zoom` and `Counter` plugins, native touch gestures, solid opaque dark backdrop (`#0C0A09`, eliminating background navbar ghosting), synchronized slide index, and an editorial bottom metadata caption drawer with a collapsible toggle allowing users to view artwork completely unobstructed on mobile.
+- **Bottom Dock Spacing Harmony** with `pb-28 md:pb-16` padding preventing any visual collision with the fixed `MobileFloatingDock`.
 
 ---
 
-## Architecture & Re-Engineering Details
+## 1. Architectural Changes & Component Structure
 
-### 1. Sticky Taxonomy Filter (`src/components/projects/ProjectFilter.tsx`)
-- **Sticky Ergonomics**: Pinned directly beneath the header during scrolling (`sticky top-16 sm:top-20 z-30`).
-- **Instant Client State**: Filters projects instantaneously without triggering page reloads or layout jumps.
-- **Micro-Interactions**: Features an active pill indicator powered by Framer Motion (`layoutId="active-taxonomy-pill"`) with smooth spring physics, touch-friendly pill targets, and bilingual support (ID/EN).
-- **Narrow Viewport Auto-Scroll**: Horizontal scroll container automatically centers the active pill on tap.
+### A. Data Layer & Types
+- **`src/types/gallery.ts`**: Unified `HighlightItem` interface supporting optional dimension hints (`width`, `height`, `aspectRatio`):
+  ```ts
+  export interface HighlightItem {
+    projectSlug: string
+    projectTitle: I18nText | { id?: string; en?: string } | Json
+    projectDescription?: I18nText | { id?: string; en?: string } | Json
+    category: string | null
+    image: ProjectImage
+    highlightOrder: number
+    createdAt: string
+    year?: string
+    toolsUsed?: string[]
+    width?: number
+    height?: number
+    aspectRatio?: string
+  }
+  ```
+- **`src/app/gallery/page.tsx`**: Server-side project extraction with `projectDescription`, `toolsUsed`, `year`, and defensive fallback extraction ensuring artwork is always delivered even if individual highlight flags are unset.
+- **`src/components/highlight-gallery-view.tsx`**: Retained full backward compatibility by re-exporting `GalleryView` and `HighlightItem`.
 
-### 2. Mobile Responsive Project Presentation (`src/components/projects/ProjectShowcase.tsx`)
-- **Strict Boundary Isolation**:
-  - **Mobile (< 768px)**: Encapsulated within `block md:hidden`. Container height is strictly constrained to `max-h-[440px]`. Features an Embla Carousel (`useEmblaCarousel`) horizontal snap slider with touch-inertia gestures, progressive index counter (e.g. `01 / 05`), pagination dots, and arrow controls. Users can also toggle into a 2-column compressed matrix view.
-  - **Desktop (>= 768px)**: Encapsulated within `hidden md:grid md:grid-cols-2 lg:grid-cols-3`. Displays an expansive bento grid with dynamic ambient radial hover spotlights (`--x`, `--y`), rich typography, and direct navigation links.
-- **Collapsible Directory ("View Full Archive")**:
-  - Accessible modal table displaying all projects with year, category, tools, and actions ("Quick View" or "Full Case Study").
+### B. Modular Gallery Components
+1. **`src/components/gallery/GalleryFilter.tsx`**:
+   - Pinned beneath the floating navbar (`sticky top-[76px] sm:top-[82px] z-30`) with frosted glass styling (`backdrop-blur-xl bg-[#FAF8F5]/90 border-b border-[#E6E2D8]/80`).
+   - Active state highlight animated with Framer Motion spring physics (`layoutId="active-gallery-filter-pill"`).
+   - Dynamic category pills with exact item counts and bilingual support ("Semua Karya" / "All Works").
+   - Horizontal touch scrolling with container-isolated `container.scrollTo(...)` preventing vertical window jumping on mobile.
 
-### 3. Compact Project Card & Bottom Sheet Drawer
-- **Compact Card (`src/components/projects/ProjectCardCompact.tsx`)**:
-  - High-performance 16:9 thumbnail preview, concise single-line title, one-line summary, and mini technology badge chips (`Illustrator`, `Photoshop`, etc.).
-  - Added `active:scale-95` spring touch feedback for natural mobile tactile feel.
-  - Implemented badge text truncation (`max-w-[calc(100%-3rem)]`) to prevent badge collisions in 2-column matrix mode.
-- **Project Drawer (`src/components/projects/ProjectDrawer.tsx`)**:
-  - Built with `vaul` (`Drawer.Root`, `Drawer.Portal`, `Drawer.Overlay`, `Drawer.Content`).
-  - Added `<Drawer.Description>` for full Radix UI / Vaul accessibility compliance.
-  - Resolved active image slide desynchronization bug by updating image counter during project transitions.
-  - Inside the drawer:
-    - Physical drag handle pill at top.
-    - Media gallery carousel with slide counter.
-    - Quantified impact chips (`+140% Brand Recall`, `100% Eco-cert Paper`, etc.).
-    - 3-column performance metrics cards.
-    - Full case study narrative & challenge analysis.
-    - Direct action buttons: "Live Demo", "GitHub Source Code", and "Full Page View".
+2. **`src/components/gallery/GalleryMasonry.tsx`**:
+   - Pure CSS multi-column masonry:
+     - **Mobile (`< 768px`)**: 2 balanced columns with `gap-3`.
+     - **Tablet (`768px - 1024px`)**: 3 columns with `gap-4`.
+     - **Desktop (`>= 1024px`)**: 4 columns with `gap-5`.
+   - Card items use `break-inside-avoid inline-block w-full mb-3 md:mb-4 lg:mb-5`.
+   - Stable keys (`${item.projectSlug}-${item.image.url}-${item.image.order ?? 0}`) allowing Framer Motion to animate layout without remounting cards or re-triggering skeleton shimmers.
 
-### 4. Floating Thumb-Zone Navigation Dock (`src/components/navigation/MobileFloatingDock.tsx`)
-- Positioned in thumb reach zone (`fixed bottom-4 left-1/2 -translate-x-1/2 z-50 md:hidden`).
-- Frosted glass finish (`backdrop-blur-xl bg-[#181716]/90 border border-white/15 shadow-2xl rounded-full px-5 py-2.5`).
-- Quick navigation to Top, Projects (`#gallery`), About (`/about`), and Instant Email Copy with animated tooltip feedback.
-- Footer padding adjusted (`pb-28 md:py-14` in `src/components/footer.tsx`) so bottom dock never occludes copyright or social links.
+3. **`src/components/gallery/GalleryItemCard.tsx`**:
+   - `next/image` integration preserving intrinsic proportions without forced cropping.
+   - Shimmer skeleton placeholder while image asset streams over the network.
+   - Tactile touch feedback via `active:scale-[0.98]`.
+   - Gradient overlay with `group-hover:opacity-100 group-focus-within:opacity-100 group-active:opacity-100` ensuring tap feedback on touchscreens.
 
-### 5. Resilient Server Data Layer (`src/app/page.tsx`)
-- Server-side data enrichment merged database records with fallback schema fields (`metrics`, `challenges`, `impact_chips`, `demo_url`, `github_url`). This guarantees that projects loaded from live Supabase databases without newly migrated columns still render complete rich metrics in the case study drawer.
+4. **`src/components/gallery/GalleryLightbox.tsx`**:
+   - Powered by `yet-another-react-lightbox` with `Zoom` and `Counter` plugins.
+   - Pure opaque dark backdrop (`#0C0A09`) eliminating floating navbar bleed-through.
+   - Synchronized slide index via `onIndexChange`.
+   - Collapsible bottom metadata drawer:
+     - Category pill and creation year.
+     - Artwork title and parent project name.
+     - Full narrative description.
+     - Tools used chips (`Adobe Illustrator`, `Photoshop`, `InDesign`, `Cinema 4D`, etc.).
+     - Direct navigation button: "Studi Kasus Proyek ↗" (`/project/[slug]`).
+     - Collapsible toggle (`ChevronDown` / `Info`) allowing full unobstructed image inspection on mobile.
+   - Touch gestures: swipe navigation between slides and pinch-to-zoom on touchscreens.
 
----
-
-## Visual Verification Artifacts (Headless Brave CDP Screenshots)
-
-All screenshots below were captured directly from the live running web application using automated Chrome DevTools Protocol in a headless Chromium/Brave session:
-
-### Evidence 1: Mobile Carousel State with Active Taxonomy Filter
-*Viewport: 375x812 (iPhone), Carousel Height: 319px (≤ 440px constraint).*
-
-![Mobile Carousel State](/verification-evidence/01_mobile_carousel_state.png)
-
-### Evidence 2: Opened Project Case Study Drawer (Vaul)
-*Gestural bottom sheet showing media carousel, impact chips, quantified metrics, and action buttons.*
-
-![Mobile Project Drawer](/verification-evidence/02_mobile_project_drawer.png)
-
-### Evidence 3: Floating Thumb-Zone Navigation Dock & Footer Clearance
-*Dock anchored at bottom-4 with clear 112px clearance above footer copyright text.*
-
-![Mobile Floating Dock](/verification-evidence/03_mobile_bottom_dock.png)
-
-### Evidence 4: Accessible Archive Directory Modal
-*Full catalog table modal displaying project year, category, technology stack, and quick view previews.*
-
-![Archive Directory Modal](/verification-evidence/04_archive_modal.png)
+5. **`src/components/gallery/GalleryView.tsx`**:
+   - Correct visual hierarchy: Editorial Header at the top, sticky taxonomy filter directly above the masonry grid.
+   - Zero-latency exact normalized category filtering (`h.category.trim().toLowerCase() === activeCategory.trim().toLowerCase()`).
+   - Automatically closes lightbox if category changes to prevent index out-of-bounds.
+   - Enforces `pb-28 md:pb-16` bottom spacing harmony.
 
 ---
 
-## Quality Assurance & Automated Verification Suite
+## 2. Deep Visual Verification Evidence
 
-### Automated Test Suite (`scripts/deep-browser-verification.mjs`)
-1. **TEST 1: Mobile Viewport Geometry (375x812)**:
-   - Carousel Container Height: `319px` (`≤ 440px` spec verified).
-   - Strict Boundary Isolation: Mobile gallery `block` / Desktop gallery `hidden`.
-   - Floating Dock & Taxonomy Filter verified in DOM.
-2. **TEST 2: Instant Category Filtering**:
-   - Tapped 'Branding & Packaging' tab.
-   - Filter updated instantaneously from 5 slides to 1 slide with 0 page reloads.
-3. **TEST 3: Embla Carousel Touch-Snap Slider & Progressive Counter**:
-   - Initial counter: `01 / 05`.
-   - Triggered slide navigation: successfully advanced to `02 / 05`.
-4. **TEST 4: Bottom Sheet Drawer (Vaul)**:
-   - Tapped project card: bottom sheet drawer animated open with spring transition.
-   - Verified 3 impact chips, 3 metric cards, 2 challenge breakdowns, Live Demo button, and GitHub button.
-   - Closed drawer cleanly via close trigger.
-5. **TEST 5: Mobile Dock Clearance**:
-   - Scrolled to page bottom: verified floating dock does not occlude footer links.
-6. **TEST 6: Desktop Viewport (1280x800) & Ambient Spotlight**:
-   - Boundary Isolation: Mobile gallery `hidden` / Desktop bento `grid` (5 cards).
-   - Mouse movement over desktop Bento card: verified `--x` and `--y` dynamically updated to mouse coordinates (`styleX: '75px', styleY: '74.26px'`).
-7. **TEST 7: Archive Directory Modal**:
-   - Tapped archive trigger: modal dialog opened with 5 complete project entries.
+All tests were executed against the compiled production build in headless Brave browser via Chrome DevTools Protocol (CDP) across iPhone (375x812) and Android (412x915) standard viewports.
 
-### Static Analysis & Build
-- `npx tsc --noEmit`: Exited 0 (0 type errors).
-- `npm run lint`: Exited 0 (0 errors, 0 warnings).
-- `npm run build`: Turbopack production build succeeded for all 14 routes.
+### Verification Results Summary
+| Test Case | Viewport | Assertion | Status |
+|---|---|---|---|
+| **1. Visual Hierarchy & 2-Column Masonry** | 375x812 | Editorial Header is above filter bar; 2 distinct column buckets (`left: 16px, 194px`), 0 horizontal overflow (`scrollWidth === clientWidth === 375px`) | **PASS** |
+| **2. Sticky Filter Clearance** | 375x812 | Filter bar sticks at `top-[76px]`, maintaining clean non-overlapping clearance below floating navbar (`bottom: 75px`) | **PASS** |
+| **3. Exact Category Filtering** | 375x812 | Tapping "Branding & Packaging" filters items to exactly 2 cards matching badge count with zero reload | **PASS** |
+| **4. Full-Screen Lightbox & Opaque Backdrop** | 375x812 | Tapping card opens lightbox, counter shows `1 / 5`, backdrop is solid `#0C0A09` with zero navbar bleed-through | **PASS** |
+| **5. Collapsible Metadata Caption Drawer** | 375x812 | Caption displays title, year, category, narrative, tools, and case study link; collapse button minimizes drawer to slim pill | **PASS** |
+| **6. Slide Navigation & Index Sync** | 375x812 | Next button advances counter to `2 / 5` and synchronizes with parent state | **PASS** |
+| **7. Lightbox Dismissal** | 375x812 | Close button dismisses lightbox cleanly, restoring masonry view | **PASS** |
+| **8. Android Viewport Check** | 412x915 | 2 distinct columns, zero horizontal margin overflow (`scrollWidth === 412px`) | **PASS** |
+| **9. Compilation & Linter** | Node/Next | `npm run build` compiled cleanly; `npm run lint` passed with 0 errors & 0 warnings | **PASS** |
+
+---
+
+### Screenshot Evidence
+
+#### (a) Mobile 2-Column Responsive Masonry State (375x812)
+File: `public/verification-evidence/01_gallery_mobile_masonry_state.png`
+- Shows the sticky taxonomy filter below the floating navbar without any text clipping.
+- Balanced 2-column distribution without horizontal overflow.
+- Generous bottom padding (`pb-28`) giving ample clearance above the fixed `MobileFloatingDock`.
+
+#### (b) Interactive Full-Screen Lightbox Active with Metadata Caption
+File: `public/verification-evidence/02_gallery_mobile_lightbox_active.png`
+- Shows full-screen high-resolution lightbox with opaque dark backdrop (no background navbar ghosting).
+- Counter plugin displaying `1 / 5`, zoom controls, and close button.
+- Bottom metadata drawer displaying category pill, year, case study link, artwork title, project title, description, tools chips, and collapsible toggle.
+
+#### (c) Category Filter Reactive State (375x812)
+File: `public/verification-evidence/03_gallery_category_filtered.png`
+- Shows active "Branding & Packaging" pill with spring animated indicator.
+- Exactly 2 filtered artwork cards displayed matching the category count.
+- Zero horizontal layout shift or page reloading, with smooth Framer Motion layout animation.
+
