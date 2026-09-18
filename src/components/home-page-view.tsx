@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { ArrowDown, Sparkles } from 'lucide-react'
 import { useLanguage } from '@/context/language-context'
-import { ProjectBentoGrid } from '@/components/project-bento-grid'
+import { ProjectShowcase } from '@/components/projects/ProjectShowcase'
 import type { Project, Profile } from '@/types/database'
 
 interface HomePageViewProps {
@@ -107,28 +107,30 @@ export function HomePageView({ projects, profile }: HomePageViewProps) {
         </div>
       </section>
 
-      {/* Bento Grid Gallery Section */}
-      <section id="gallery" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-18 scroll-mt-20">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 md:mb-12 gap-4 border-b border-[#E6E2D8] pb-6">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-mono text-[#E26D5C] uppercase tracking-widest mb-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{isId ? 'Karya Terpilih' : 'Selected Works'}</span>
+      {/* Re-Engineered Showcase Section */}
+      <section id="gallery" className="w-full scroll-mt-16 pt-10 sm:pt-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-mono text-[#E26D5C] uppercase tracking-widest mb-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{isId ? 'Karya Terpilih' : 'Selected Works'}</span>
+              </div>
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#181716] tracking-tight leading-[1.05]">
+                {isId ? 'Galeri Proyek & Eksplorasi' : 'Project Gallery & Exploration'}
+              </h2>
             </div>
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#181716] tracking-tight leading-[1.05]">
-              {isId ? 'Galeri Proyek & Eksplorasi' : 'Project Gallery & Exploration'}
-            </h2>
+            <Link
+              href="/gallery"
+              className="text-xs font-mono text-[#6B6661] hover:text-[#2B50EC] transition-colors underline-offset-4 hover:underline self-start sm:self-end"
+            >
+              {isId ? 'Lihat Semua Highlight →' : 'View All Highlights →'}
+            </Link>
           </div>
-          <Link
-            href="/gallery"
-            className="text-xs font-mono text-[#6B6661] hover:text-[#2B50EC] transition-colors underline-offset-4 hover:underline"
-          >
-            {isId ? 'Lihat Semua Highlight →' : 'View All Highlights →'}
-          </Link>
         </div>
 
-        {/* Bento Grid Component */}
-        <ProjectBentoGrid projects={projects} />
+        {/* Modular Space-Optimized Project Showcase */}
+        <ProjectShowcase projects={projects} />
       </section>
     </div>
   )

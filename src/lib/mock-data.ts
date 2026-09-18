@@ -76,6 +76,30 @@ export const fallbackProjects: Project[] = [
     display_order: 1,
     created_at: '2026-01-15T00:00:00Z',
     updated_at: '2026-01-15T00:00:00Z',
+    demo_url: 'https://behance.net',
+    github_url: 'https://github.com',
+    impact_chips: ['+140% Brand Recall', '100% Eco-cert Paper', 'Featured on Behance'],
+    metrics: [
+      { label: { id: 'Peningkatan Pengenalan Merek', en: 'Brand Recall Boost' }, value: '+140%' },
+      { label: { id: 'Bahan Daur Ulang', en: 'Recycled Materials' }, value: '100%' },
+      { label: { id: 'Titik Distribusi Retail', en: 'Retail Distribution' }, value: '24 Outlets' },
+    ],
+    challenges: [
+      {
+        title: { id: 'Konsistensi Tinta Neon pada Kertas Kraft', en: 'Neon Ink Fidelity on Kraft Substrate' },
+        description: {
+          id: 'Mengatasi penyerapan tinta tinggi pada kertas bertekstur tanpa kehilangan saturasi pigmen neon fluorescent.',
+          en: 'Overcoming high substrate absorption on textured stock while preserving vibrant fluorescent neon pigment fidelity.',
+        },
+      },
+      {
+        title: { id: 'Sistem Label Modular Multi-Origin', en: 'Multi-Origin Modular Label System' },
+        description: {
+          id: 'Membangun arsitektur informasi label fleksibel untuk 12 varietas biji kopi seasonal dengan biaya produksi efisien.',
+          en: 'Designing a flexible label information hierarchy for 12 rotating single-origin harvests with optimal print unit economics.',
+        },
+      },
+    ],
   },
   {
     id: 'p2',
@@ -111,6 +135,30 @@ export const fallbackProjects: Project[] = [
     display_order: 2,
     created_at: '2026-02-10T00:00:00Z',
     updated_at: '2026-02-10T00:00:00Z',
+    demo_url: 'https://vimeo.com',
+    github_url: 'https://github.com',
+    impact_chips: ['60 FPS WebGL', '15k+ Impressions', 'Exhibited at DGID 2026'],
+    metrics: [
+      { label: { id: 'Kecepatan Render Realtime', en: 'Realtime Frame Rate' }, value: '60 FPS' },
+      { label: { id: 'Total Pengunjung Galeri', en: 'Exhibition Attendees' }, value: '15,000+' },
+      { label: { id: 'Variasi Eksperimen Tipografi', en: 'Generative Iterations' }, value: '48 Systems' },
+    ],
+    challenges: [
+      {
+        title: { id: 'Sinkronisasi FFT Audio ke Transformasi Vektor', en: 'FFT Audio-to-Vector Sync' },
+        description: {
+          id: 'Memetakan frekuensi audio low-pass secara langsung ke deformasi bezier kurva tipografi secara deterministik.',
+          en: 'Mapping real-time sub-bass audio frequencies directly into mathematical bezier curve deformations.',
+        },
+      },
+      {
+        title: { id: 'Performa Render Resolusi 4K', en: '4K Realtime Motion Pipeline' },
+        description: {
+          id: 'Optimasi kalkulasi instancing GPU shader agar tidak terjadi frame-drop pada instalasi proyeksi skala besar.',
+          en: 'Optimizing GPU shader instancing passes to avoid frame drops across large-scale physical projector arrays.',
+        },
+      },
+    ],
   },
   {
     id: 'p3',
@@ -146,6 +194,30 @@ export const fallbackProjects: Project[] = [
     display_order: 3,
     created_at: '2026-03-01T00:00:00Z',
     updated_at: '2026-03-01T00:00:00Z',
+    demo_url: 'https://behance.net',
+    github_url: 'https://github.com',
+    impact_chips: ['280 Pages Monograph', 'Sold Out Edition (500 Cop.)', 'Swiss Design Award Longlist'],
+    metrics: [
+      { label: { id: 'Ketebalan Halaman', en: 'Total Book Pages' }, value: '280 Pages' },
+      { label: { id: 'Edisi Terjual Habis', en: 'Limited Edition Run' }, value: '500 Copies' },
+      { label: { id: 'Arsip Motif Terdokumentasi', en: 'Documented Motifs' }, value: '120 Symbols' },
+    ],
+    challenges: [
+      {
+        title: { id: 'Separasi Warna Risograph Multi-Plate', en: 'Multi-Drum Risograph Color Separation' },
+        description: {
+          id: 'Kalibrasi overlap warna tinta Risograph kedelai murni untuk menghindari over-saturation dan registration drift.',
+          en: 'Calibrating soy-based Risograph color overlaps to prevent bleed-through and misregistration artifacts across signatures.',
+        },
+      },
+      {
+        title: { id: 'Jilid Lay-Flat Swiss Binding', en: 'Swiss Lay-Flat Binding Architecture' },
+        description: {
+          id: 'Struktur jilid terbuka dengan benang jahit katun kontras agar buku dapat dibuka 180 derajat rata sempurna.',
+          en: 'Constructing exposed-spine Swiss binding with contrasting thread to ensure 180-degree lay-flat reading experience.',
+        },
+      },
+    ],
   },
   {
     id: 'p4',
@@ -175,6 +247,30 @@ export const fallbackProjects: Project[] = [
     display_order: 4,
     created_at: '2026-04-12T00:00:00Z',
     updated_at: '2026-04-12T00:00:00Z',
+    demo_url: 'https://aura-spatial.vercel.app',
+    github_url: 'https://github.com/najib/aura-spatial',
+    impact_chips: ['LCP < 0.8s', '500+ Daily Curators', '99.8% Accessibility Score'],
+    metrics: [
+      { label: { id: 'Kecepatan LCP Core Web Vitals', en: 'Core Web Vitals LCP' }, value: '< 0.8s' },
+      { label: { id: 'Pengguna Kurator Aktif', en: 'Active Curators' }, value: '500+' },
+      { label: { id: 'Skor Aksesibilitas WCAG', en: 'Accessibility Score' }, value: '99.8%' },
+    ],
+    challenges: [
+      {
+        title: { id: 'Sistem Micro-Gestures Touchscreen', en: 'Touchscreen Micro-Gesture System' },
+        description: {
+          id: 'Menyelaraskan gesture swipe horizontal dengan pencegahan benturan scroll vertical pada browser mobile.',
+          en: 'Eliminating gesture collision between horizontal swipe panning and natural mobile vertical scroll axes.',
+        },
+      },
+      {
+        title: { id: 'Dynamic Color Token Contrast Safety', en: 'Dynamic Color Token Contrast Safety' },
+        description: {
+          id: 'Perhitungan dinamis kontras rasio APCA (Accessible Perceptual Contrast Algorithm) untuk kartu artwork gelap/terang.',
+          en: 'Realtime APCA contrast calculations ensuring readable typography against dynamic user-uploaded artwork palettes.',
+        },
+      },
+    ],
   },
   {
     id: 'p5-draft',
@@ -204,6 +300,9 @@ export const fallbackProjects: Project[] = [
     display_order: 5,
     created_at: '2026-05-01T00:00:00Z',
     updated_at: '2026-05-01T00:00:00Z',
+    demo_url: null,
+    github_url: null,
+    impact_chips: ['Internal R&D', 'NDA Protected'],
   },
 ]
 

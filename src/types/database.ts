@@ -25,6 +25,16 @@ export interface ProjectImage {
   highlight_order?: number
 }
 
+export interface ProjectMetric {
+  label: I18nText | string
+  value: string
+}
+
+export interface ProjectChallenge {
+  title: I18nText | string
+  description: I18nText | string
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -78,6 +88,11 @@ export interface Database {
           display_order: number
           created_at: string
           updated_at: string
+          demo_url?: string | null
+          github_url?: string | null
+          impact_chips?: string[] | null
+          metrics?: ProjectMetric[] | Json | null
+          challenges?: ProjectChallenge[] | Json | null
         }
         Insert: {
           id?: string
@@ -92,6 +107,11 @@ export interface Database {
           display_order?: number
           created_at?: string
           updated_at?: string
+          demo_url?: string | null
+          github_url?: string | null
+          impact_chips?: string[] | null
+          metrics?: ProjectMetric[] | Json | null
+          challenges?: ProjectChallenge[] | Json | null
         }
         Update: {
           id?: string
@@ -106,6 +126,11 @@ export interface Database {
           display_order?: number
           created_at?: string
           updated_at?: string
+          demo_url?: string | null
+          github_url?: string | null
+          impact_chips?: string[] | null
+          metrics?: ProjectMetric[] | Json | null
+          challenges?: ProjectChallenge[] | Json | null
         }
         Relationships: []
       }

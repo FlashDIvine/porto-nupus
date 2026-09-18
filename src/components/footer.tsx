@@ -100,7 +100,7 @@ export async function Footer() {
 
   return (
     <footer className="w-full bg-white/40 backdrop-blur-md border-t border-white/60 mt-auto transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-28 md:py-14 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Brand & Tagline */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left gap-1">
           <Link href="/" className="font-heading text-xl font-semibold tracking-tight text-[#181716] hover:text-[#2B50EC] transition-colors">

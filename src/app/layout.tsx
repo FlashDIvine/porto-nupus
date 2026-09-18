@@ -4,6 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "@/context/language-context";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { MobileFloatingDock } from "@/components/navigation/MobileFloatingDock";
 import {
   PuffyCloudsLayer,
   SeagullsBackgroundLayer,
@@ -114,10 +115,12 @@ export default function RootLayout({
           {/* Lapisan Latar Belakang Burung (Di depan awan, di balik kartu konten: z-[2]) */}
           <SeagullsBackgroundLayer />
           <Navbar />
-          <main className="relative z-10 flex-1 w-full">{children}</main>
+          <main className="relative z-10 flex-1 w-full pb-16 md:pb-0">{children}</main>
           {/* Lapisan Latar Depan Burung (Di depan kartu konten: z-40) */}
           <SeagullsForegroundLayer />
           <Footer />
+          {/* Floating Thumb-Zone Navigation Dock for Mobile Devices */}
+          <MobileFloatingDock />
         </LanguageProvider>
       </body>
     </html>
